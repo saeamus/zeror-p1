@@ -104,3 +104,7 @@ CSS Navigation Bar - W3Schools
 ==============================
 
 <https://www.w3schools.com/css/css_navbar.asp>
+
+Responsive Navigation Bar
+=========================
+<https://www.w3schools.com/howto/howto_js_topnav_responsive.asp>
