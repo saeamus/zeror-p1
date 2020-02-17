@@ -34,7 +34,6 @@
 [Git의 기본 개념 알기](#git의-기본-개념-알기)
   
 
-
 > [Git 저장소(Git repository) ](#git-저장소git-repository)
 >
 > [저장소 만들기 ](#저장소-만들기)
