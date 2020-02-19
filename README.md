@@ -38,8 +38,14 @@ http://15.164.212.170:8000
 3.npm 설치  
 4.express 설치  
 5.nodemon 설치(옵션)  
-6.프로젝트 폴더로 경로 변경  
- npm install  
- node app.js  
-7.nodemon설치시에는  
- npm start
+6.프로젝트 폴더로 경로 변경
+
+    npm install
+ 
+    node app.js
+ 
+7.nodemon설치시에는
+
+    npm install
+
+    npm start
