@@ -4,5 +4,14 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+/* Credit to bootsnipp.com for the css for the color graph */
+/*signup화면 css */
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
 }
