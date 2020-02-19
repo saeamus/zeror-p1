@@ -40,10 +40,12 @@ http://15.164.212.170:8000
 5.nodemon 설치(옵션)  
 6.프로젝트 폴더로 경로 변경
 
-     npm install
+    npm install
  
-     node app.js
+    node app.js
  
 7.nodemon설치시에는
 
-     npm start
+    npm install
+
+    npm start
