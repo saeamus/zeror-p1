@@ -1,14 +1,83 @@
+<link
+  href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login실패</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <meta charset="utf-8" />
+
+    <title>Sign-Up</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/bootstrap/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="font-awesome/css/font-awesome.min.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.10.2.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
   </head>
-  <body style="background-color:#55bccc">
-    <h1>아이디가 존재하지 않거나 Password가 틀립니다.</h1>
-    <a href="users/sign_up" style="color:midnightblue">회원가입 하기</a>
-    <div>
-      <a href="users/pw_reset" style="color:midnightblue">Password 찾기</a>
+  <body>
+    <div class="navigation">
+      <script
+        type="text/javascript"
+        src="/javascripts/MyMenu1/MyMenu1.js?h=33FE"
+      ></script>
+      <div id="MyMenu1"></div>
+    </div>
+    <div class="container">
+      <div class="outer">
+        <div class="inner">
+          <div class="centered">
+            <h2>아이디가 존재하지 않거나 Password가 틀립니다.</h2>
+            <hr class="colorgraph" />
+            <div class="row">
+              <div
+                class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"
+              >
+                <div class="row">
+                  <div class="col-xs-12 col-md-6">
+                    <a
+                      href="users/sign_up"
+                      class="btn btn-primary btn-block btn-lg"
+                      >회원가입</a
+                    >
+                  </div>
+                  <div class="col-xs-12 col-md-6">
+                    <a
+                      href="users/pw_reset"
+                      class="btn btn-warning btn-block btn-lg"
+                      >Password 찾기</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

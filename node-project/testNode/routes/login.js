@@ -45,9 +45,9 @@ router.post("/", async function(req, res, next) {
       .digest("hex"); // input password를 회원 가입때와 동일한 방법으로 암호화
 
     if (dbPassword === hashPassword) {
-      res.render("welcome", { name: body.userId }); //암호화된 password를 비교하여 같으면 환영 메세지 출력(~/views/welcome.ejs)
+      res.render("welcome", { name: body.userId, title: "Welcome" }); //암호화된 password를 비교하여 같으면 환영 메세지 출력(~/views/welcome.ejs)
     } else {
-      res.render("nodata"); //password가 다르면 화면에  메세지 출력 (~/views/nodata.ejs)
+      res.render("nodata", { title: "비회원" }); //password가 다르면 화면에  메세지 출력 (~/views/nodata.ejs)
     }
   });
 });
