@@ -1,5 +1,6 @@
 Menu bar 관련
 =============
+web site 구축시 menu를 만드는데 도움을 줄 수 있는 방법을 조사하여 아래와 같이 정리함
 
 29+ Free Responsive Navigation Menu Plugins & Tutorials
 =======================================================
