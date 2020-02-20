@@ -46,7 +46,7 @@ http://15.164.212.170:8000
 
 [링크 : Nodejs다운로드](https://nodejs.org/en/)
 
-    설치후 제대로 설치 되었는지 cmd 창에서 확인해 봅니다.
+    설치후 제대로 설치 되었는지 cmd 창에서 node와 npm의 버전을 확인해 봅니다.
 
     C:\Users\byun>node -v
     v10.15.0
