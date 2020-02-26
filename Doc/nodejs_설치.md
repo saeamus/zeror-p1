@@ -96,6 +96,6 @@ manager) 선택
 (Debian and Ubuntu based Linux distributions, Enterprise Linux/Fedora
 and Snap packages) 선택
 
-예3) \[처음부터 시작하는 EC2\] nodejs 설치
+예3) \[처음부터 시작하는 EC2\] nodejs 설치    
 
 <https://yuddomack.tistory.com/entry/%EC%B2%98%EC%9D%8C%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-EC2-nodejs-%EC%84%A4%EC%B9%98>
