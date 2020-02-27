@@ -130,4 +130,4 @@ DB 인스턴스의 수정 버튼을 누릅니다
 
 이제 DB를 연결하면 그림과 같이 DB 서버의 시간이 한국시간으로 변경된 것을 확인할 수 있습니다.
 
-![Timezone](./images/Timezone/changed_dbtime.png)
+![Timezone](./images/Timezone/changed_dbTime.png)
