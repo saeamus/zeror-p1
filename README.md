@@ -92,6 +92,8 @@ http://15.164.212.170:8000
     [nodemon] watching dir(s): _._
     [nodemon] watching extensions: js,mjs,json
     [nodemon] starting `node ./bin/www`
+    ./bin/www 으로 서버생성
+    Listening on port 8000
     DB연결 성공
 
 #### 5.이제 웹브라우저의 주소창에 아래와 같이 입력하면
