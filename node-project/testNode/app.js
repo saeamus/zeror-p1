@@ -71,7 +71,12 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+//20200227 package.json의   "start": "nodemon app.js" 를   "start": "nodemon ./bin/www" 로 변경
+//20200227 아래 서버생성문 삭제
 //서버 생성. 실행되면 포트8000의 HTTP request가 들어올때까지 대기
-var server = app.listen(app.get("port"), function() {
-  console.log("Express server listening on port " + server.address().port);
-});
+// var server = app.listen(app.get("port"), function() {
+//   console.log(
+//     "app.js서버 실행문,Express server listening on port " +
+//       server.address().port
+//   );
+// });
