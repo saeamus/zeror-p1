@@ -75,6 +75,25 @@ http://15.164.212.170:8000
     Express server listening on port 8000
     DB연결 성공
 
+서버 생성을 ./bin/www에서 하도록 수정하였습니다
+
+1)app.js의 서버생성 문을 삭제  
+ 2)package.json의 script 문을 "start": "nodemon app.js"에서 "start": "nodemon ./bin/www" 로 수정  
+ 3)./bin/www파일의 port를 AWS DB에서 사용하는 port 8000으로 변경  
+ 4)이제 npm start명령을 실행하면 ./bin/www가 실행되고 서버가 생성된 것을 획인할 수 있습니다.
+
+    C:\Users\byun\Documents\Git-Saeamus\node-project\testNode>npm start
+
+    > testnode@0.0.0 start C:\Users\byun\Documents\Git-Saeamus\node-project\testNode
+    > nodemon ./bin/www
+
+    [nodemon] 2.0.2
+    [nodemon] to restart at any time, enter `rs`
+    [nodemon] watching dir(s): _._
+    [nodemon] watching extensions: js,mjs,json
+    [nodemon] starting `node ./bin/www`
+    DB연결 성공
+
 #### 5.이제 웹브라우저의 주소창에 아래와 같이 입력하면
 
     localhost:8000
