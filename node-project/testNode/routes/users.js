@@ -48,7 +48,7 @@ router.get("/sign_up", function(req, res, next) {
 
 //암호분실 화면으로 라우팅----공사중!!!!
 router.get("/pw_reset", function(req, res, next) {
-  res.render("construction");
+  res.render("construction.html"); //확장자가 ejs면 확장자 필료 없음
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +69,7 @@ router.post("/sign_up", async function(req, res, next) {
   var dt = getTimeStamp(); //javascript에서는 yyyy-mm-dd hh:mm:ss 형식 변환함수가 없다. 함수를 만들어 써야한다.
 
   //query문: user 정보를 db에 저장 , userId는 유니크특성을 가짐(동일 아이디로 중복 가입 안됨)
-  var sql =
-    "INSERT INTO user_info(userId,email,password,salt,createDate,updateDate)  VALUES(?,?,?,?,?,?)";
+  var sql = "INSERT INTO user_info(userId,email,password,salt,createDate,updateDate)  VALUES(?,?,?,?,?,?)";
   mysqlDB.query(
     sql,
     [body.username, body.email, hashPassword, salt, dt, dt], // 위의 query문에서 values(?,?,?,?,?,?) 를 정의하는 파라메터

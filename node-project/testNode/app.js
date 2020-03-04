@@ -21,6 +21,7 @@ var app = express();
 //라우팅 모듈 선언
 var indexRouter = require("./routes/login"); // indexRouter는 ~/routes/login.js 파일을 사용하겠다는 의미. 확장자 ".js"생략함
 var usersRouter = require("./routes/users");
+var modulesRouter = require("./routes/modules");
 
 //mysql db connection
 var mysqlDB = require("./conf/saeamus-db"); //db연결설정 모듈을 선언 ~/conf/saeamus-db.js 파일을 사용하겠다는 의미
@@ -35,6 +36,7 @@ mysqlDB.query("SELECT * from members", function(err, rows, fields) {
 // view engine setup
 app.set("views", path.join(__dirname, "views")); //뷰 페이지의 폴더 기본 경로로 __dirname(현 project 폴더)/views/ 이름의 폴더를 사용하겠다는 의미
 app.set("view engine", "ejs"); //view 엔진으로 HTML이 아닌 ejs 템플릿 엔진을 사용하겠다.
+app.engine("html", require("ejs").renderFile); //ejs 엔진으로 html파일을 랜더링 가능하게 해준다
 
 // express 서버 포트는 8000이다(cafe24 호스팅 서버는 8001 포트 사용)
 //AWS EC2서버는 반드시 보안설정에 가서 인바운드 포트(여기서는8000)를 접속가능한 상태로 설정해야한다.안그럼 연결 안됨
@@ -52,6 +54,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //상단의 라우팅 모듈 선언과 연결되는 부분
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/modules", modulesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

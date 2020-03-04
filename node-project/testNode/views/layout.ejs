@@ -1,33 +1,48 @@
+<!-- file:layout.ejs
+     작성:20200303 james
+     설명:
+     웹 페이지의 기본 레이아웃 템플릿 
+     여러 페이지에 공통으로 적용되는 부분과 page laout을 설정
+     header를 설정
+     메뉴바를 설정
+     main영역 설정
+     footer 영역 설정-->
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>Layout</title>
     <meta name="description" content="" />
     <meta name="author" content="" />
-
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!--favicon.정의 -->
+
+    <!--favicon 설정 -->
     <link rel="icon" href="/ico/icons8-ship-wheel-48.png" />
-
+    <!--bootstarp CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous" />
+    <!-- 무료 icon CSS 여기서 사용하는 icon은 https://fontawesome.com/v4.7.0/icons/에서 다운받은 것임-->
     <link rel="stylesheet" href="/ico/font-awesome/css/font-awesome.min.css" />
-    <!-- Custom styles -->
-
+    <!-- header, nav, footer등 layout 설정용 CSS -->
     <link type="text/css" href="/stylesheets/sticky-footer-navbar.css" rel="stylesheet" />
-    <!--Custom styles-->
+    <!--main 설정용 CSS-->
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <!-- 메뉴바 설정용 CSS 메뉴빌더에서 생성된 것-->
     <link rel="stylesheet" href="/topnav/index1_files/mbcsmbmcp.css" type="text/css" />
+    <!-- 아래 메뉴바를 삽입하기위한 jqurey문을 실행하기위해 jquery script를 먼저 실행한다 -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
-
+    <!-- 메뉴바 html문을 삽입하기위한 script-->
+    <!--  $(document).ready(function()--브라우저가 웹페이지 로딩을 마치면 jquery문이 실행된다-->
+    <!-- $("#menubar").load("/topnav/index1.html");--태그 id=menubar인 곳에 /public/topnav.index1.html파일을 load한다.-->
+    <!-- 즉, html문에 html문이 삽입되는 기능 -->
+    <!-- html문은 static file임. 그러므로 html파일은 public폴더에 있어야한다.어디서 불러 오는지 몰라서 2시간 멈게 헤멨다...ㅠㅠ -->
     <script type="text/javascript">
       $(document).ready(function() {
-        $("#menubar").load("/topnav/index1.html"); //static file에서 불러옴. html파일을 public폴더에 넣어야한다
+        $("#menubar").load("/topnav/index1.html");
       });
     </script>
   </head>
@@ -38,6 +53,7 @@
         <h6 class="my-0 mr-md-auto font-weight-bold">SAEAMUS</h6>
 
         <h6 class="text-capitalize my-0  font-weight-bold">
+          <!-- ejs엔진 형식, 라우터로부터 넘겨 받은 name 파라메터를 화면에 나타냄 -->
           <i class="fa fa-user-circle " aria-hidden="true">
             <%= name %>님을 환영합니다.
           </i>
@@ -45,21 +61,17 @@
         <a class="btn btn-sm btn-info" href="#" onclick="alert('코드 작성중 입니다.')"> Logout</a>
       </div>
     </header>
+    <!-- header를 넣기위해 navbar 고정을 해제함 -->
     <!-- Fixed navbar -->
     <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark"> -->
+    <!-- jquery문에 의해 메뉴바가 삽입되는 위치  -->
     <nav>
       <div id="menubar"></div>
     </nav>
 
-    <!-- Begin page content -->
+    <!-- 본문 영역, 여기에 각 모듈별 content를 작성 -->
     <main role="main" class="container">
-      <div class="outer">
-        <div class="inner">
-          <div class="centered">
-            <h1>Welcome <%= name %> !!!</h1>
-          </div>
-        </div>
-      </div>
+      <p><%-content%></p>
     </main>
 
     <footer class="footer">
@@ -68,27 +80,12 @@
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="/javascripts/jquery-slim.min.js"><\/script>'
-        );
-    </script> -->
+    <!-- popper core JavaScript -->
     <script src="/javascripts/popper.min.js"></script>
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+    <!-- Bootstrap core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <!-- Menus will work without this javascript file. It is used only for extra
-     effects, improved usability, compatibility with very old web browsers
-     and support for touch screen devices. -->
+    <!-- menubar JavaScript 메뉴빌더에서 생성된 것-->
     <script type="text/javascript" src="/topnav/index1_files/mbjsmbmcp.js"></script>
   </body>
 </html>

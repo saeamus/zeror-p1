@@ -9,7 +9,11 @@
 var express = require("express");
 var router = express.Router();
 const crypto = require("crypto");
+var fs = require("fs");
+var ejs = require("ejs");
 var mysqlDB = require("../conf/saeamus-db"); //이것을 지우면 mysqlDB가 없다고 에러난다.매 파일마다 선언???
+
+var home = fs.readFileSync("./views/home.ejs", "utf8"); //layout.ejs의 <main>content영역애  삽입할 home.ejs를 불러온다
 
 //라우터의 get()함수를 이용해 request URL('/')에 대한 업무처리 로직 정의
 //즉,호스트주소:8000으로 접속시 index route
@@ -25,6 +29,8 @@ router.get("/", function(req, res, next) {
 //////////////////////////////////////////////////////////////////////////////////////////
 router.post("/", async function(req, res, next) {
   let body = req.body;
+  let username = body.userId;
+  global.username = username; //global 변수 선언
   var sql = "select * from user_info where userId=?"; //query문 ?표는 아래 query문에서 두번째 파라메타( [body.userId])로 전달
 
   mysqlDB.query(sql, [body.userId], function(err, results) {
@@ -45,7 +51,8 @@ router.post("/", async function(req, res, next) {
       .digest("hex"); // input password를 회원 가입때와 동일한 방법으로 암호화
 
     if (dbPassword === hashPassword) {
-      res.render("layout", { name: body.userId, title: "Welcome" }); //암호화된 password를 비교하여 같으면 환영 메세지 출력(~/views/welcome.ejs)
+      var home_ren = ejs.render(home, { name: username }); //위치가 중요 username을 선언하기 전에 넣으면 안됨.home.ejs를 미리 랜더링
+      res.render("layout", { name: body.userId, title: "Welcome", content: home_ren }); //암호화된 password를 비교하여 같으면 환영 메세지 출력(~/views/home.ejs)
     } else {
       res.render("nodata", { title: "비회원" }); //password가 다르면 화면에  메세지 출력 (~/views/nodata.ejs)
     }
