@@ -100,3 +100,7 @@ utf8\_general\_ci로 수정하고 저장한다.
 
 **DB 인스턴스 수정** 버턴을 누른다.
 
+**추가 사항:**    
+DB data가 생성된 시간이 다르게 나타나는 문제가 생겨서 서버 Timezone 설정을 변경하여야 합니다.    
+[Timezone.md](https://github.com/saeamus/zeror-p1/blob/master/Doc/Timezone.md) 문서를 참조바랍니다.
+
