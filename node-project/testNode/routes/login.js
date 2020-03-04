@@ -16,11 +16,16 @@ var mysqlDB = require("../conf/saeamus-db"); //이것을 지우면 mysqlDB가 �
 var home = fs.readFileSync("./views/home.ejs", "utf8"); //layout.ejs의 <main>content영역애  삽입할 home.ejs를 불러온다
 
 //라우터의 get()함수를 이용해 request URL('/')에 대한 업무처리 로직 정의
-//즉,호스트주소:8000으로 접속시 index route
+//즉,호스트주소:8000으로 접속시 index route login화면
 router.get("/", function(req, res, next) {
   res.render("login", { title: "Log In Page" }); // ~/views/login.ejs를 브라우저로 전송하고 탭제목은 "Log In Page" 이다
 });
 
+//home메뉴 클릭시 home 페이지로 간다
+router.get("/home", function(req, res, next) {
+  var home_ren = ejs.render(home, { name: username }); //위치가 중요 username을 선언하기 전에 넣으면 안됨.home.ejs를 미리 랜더링
+  res.render("layout", { name: username, title: "Welcome", content: home_ren }); //암호화된 password를 비교하여 같으면 환영 메세지 출력(~/views/home.ejs)
+});
 //////////////////////////////////////////////////////////////////////////////////////////
 //로그인 방법 1 :암호화 방법
 //입력된 userId의 해당 data를 db에서 불러온다.
