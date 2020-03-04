@@ -1,17 +1,3 @@
-html,
-body {
-  background-color: #55bccc;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
-  font-family: "Numans", sans-serif;
-}
-
-a {
-  color: #00b7ff;
-}
-
 /* Credit to bootsnipp.com for the css for the color graph */
 /*signup화면 css */
 .colorgraph {
@@ -21,21 +7,6 @@ a {
   border-radius: 5px;
 }
 
-.container {
-  width: 70%;
-  height: 70%;
-  margin: 40px auto;
-}
-h1 {
-  text-align: center;
-  vertical-align: middle;
-  font-weight: bold;
-}
-h2 {
-  text-align: center;
-  vertical-align: middle;
-  font-weight: bold;
-}
 .outer {
   display: table;
   width: 100%;

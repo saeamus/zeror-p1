@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Layout</title>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--favicon.정의 -->
+    <link rel="icon" href="/ico/icons8-ship-wheel-48.png" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/ico/font-awesome/css/font-awesome.min.css" />
+    <!-- Custom styles -->
+
+    <link type="text/css" href="/stylesheets/sticky-footer-navbar.css" rel="stylesheet" />
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/topnav/index1_files/mbcsmbmcp.css" type="text/css" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#menubar").load("/topnav/index1.html"); //static file에서 불러옴. html파일을 public폴더에 넣어야한다
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <div class="d-flex flex-column flex-md-row align-items-center px-md-4 border-bottom box-shadow bg-secondary text-white">
+        <h6 class="my-0 mr-md-auto font-weight-bold">SAEAMUS</h6>
+
+        <h6 class="text-capitalize my-0  font-weight-bold">
+          <i class="fa fa-user-circle " aria-hidden="true">
+            <%= name %>님을 환영합니다.
+          </i>
+        </h6>
+        <a class="btn btn-sm btn-info" href="#" onclick="alert('코드 작성중 입니다.')"> Logout</a>
+      </div>
+    </header>
+    <!-- Fixed navbar -->
+    <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark"> -->
+    <nav>
+      <div id="menubar"></div>
+    </nav>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <div class="outer">
+        <div class="inner">
+          <div class="centered">
+            <h1>Welcome <%= name %> !!!</h1>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="/javascripts/jquery-slim.min.js"><\/script>'
+        );
+    </script> -->
+    <script src="/javascripts/popper.min.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <!-- Menus will work without this javascript file. It is used only for extra
+     effects, improved usability, compatibility with very old web browsers
+     and support for touch screen devices. -->
+    <script type="text/javascript" src="/topnav/index1_files/mbjsmbmcp.js"></script>
+  </body>
+</html>
