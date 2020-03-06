@@ -22,13 +22,14 @@ mysql-for-excel-1.3.8.msi 다운받아서 설치했으나 실패함.
 
 “Visual Studio Tools for Office Runtime” 먼저 설치하라고 나옵니다.    
 
-“Visual Studio Tools for Office Runtime” 구글에서 찾아봅니다.
+“Visual Studio Tools for Office Runtime” 구글에서 찾아봅니다.    
+
 [방법: Visual Studio Tools for Office 런타임 재배포 가능 패키지](https://docs.microsoft.com/ko-kr/visualstudio/vsto/how-to-install-the-visual-studio-tools-for-office-runtime-redistributable?view=vs-2019)    
 
     1.NET Framework 4 이상을 설치합니다.
     2. Vstor_redist 를 실행 하 여 Microsoft Visual Studio Tools for Office Runtime를 설치 합니다.
 
-이러한 설치 파일은 [Visual Studio 2010 Tools For Office runtime](https://www.microsoft.com/ko-kr/download/details.aspx?id=48217)에서 다운로드할 수 있습니다.
+이러한 설치 파일은 [Visual Studio 2010 Tools For Office runtime](https://www.microsoft.com/ko-kr/download/details.aspx?id=48217)에서 다운로드할 수 있습니다.    
 vstor_redist.exe 다운 받아서 설치합니다.
 
 ## 사용법
