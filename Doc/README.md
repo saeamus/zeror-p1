@@ -4,13 +4,13 @@
 
 ### 아래와 같은 순서로 구현에 필요한 문서를 정리합니다.
 
-  1. Git 사용법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/Git%EC%82%AC%EC%9A%A9%EB%B2%95.md"> Git사용법.md</a> 
-  2. AWS EC2 서버구축 : <a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/AWS_EC2_%EC%84%9C%EB%B2%84_%EB%A7%8C%EB%93%A4%EA%B8%B0.md"> AWS_EC2_서버_만들기.md</a>  
-  3. AWS RDS 서버구축 :<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/AWS_RDS_%EC%84%9C%EB%B2%84_%EB%A7%8C%EB%93%A4%EA%B8%B0.md"> AWS_RDS_서버_만들기.md</a>
-  4. nodejs설치방법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/nodejs_%EC%84%A4%EC%B9%98.md"> nodejs_설치.md</a>
-  5. 웹 페이지 로그인 창 만드는 방법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/%EB%A1%9C%EA%B7%B8%EC%9D%B8.md"> 로그인.md</a>
-  6. 웹 페이지 메뉴 만드는 방법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/MenuBuilder%EB%B6%84%EC%84%9D.md"> MenuBuilder분석.md</a>
-  7. Express와 Express-generator를 사용하여 기본적인 파일들을 생성.
+  1. Git 사용법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/001.Git%EC%82%AC%EC%9A%A9%EB%B2%95.md"> Git사용법.md</a> 
+  2. AWS EC2 서버구축 : <a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/002.AWS_EC2_%EC%84%9C%EB%B2%84_%EB%A7%8C%EB%93%A4%EA%B8%B0.md"> AWS_EC2_서버_만들기.md</a>  
+  3. AWS RDS 서버구축 :<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/003.AWS_RDS_%EC%84%9C%EB%B2%84_%EB%A7%8C%EB%93%A4%EA%B8%B0.md"> AWS_RDS_서버_만들기.md</a>
+  4. nodejs설치방법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/004.nodejs_%EC%84%A4%EC%B9%98.md"> nodejs_설치.md</a>
+  5. 웹 페이지 로그인 창 만드는 방법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/005.%EB%A1%9C%EA%B7%B8%EC%9D%B8.md"> 로그인.md</a>
+  6. 웹 페이지 메뉴 만드는 방법:<a href="https://github.com/saeamus/zeror-p1/blob/master/Doc/007.MenuBuilder%EB%B6%84%EC%84%9D.md"> MenuBuilder분석.md</a>
+  7. Express와 Express-generator를 사용하여 기본적인 파일들을 생성:<a href="hhttps://github.com/saeamus/zeror-p1/blob/master/Doc/011.Express_Express-generator.md"> Express_Express-generator.md</a>
   8. 작업 디렉토리에서 npm start를 입력하여 http:\/\/localhost:3000\/ 에서 Express 글자가 나오는지 확인
   9. Web page에 login창을 만든다.
   10. Db와 연동하여 회원 가입창을 만든다.
