@@ -39,7 +39,7 @@
     <!--  $(document).ready(function()--브라우저가 웹페이지 로딩을 마치면 jquery문이 실행된다-->
     <!-- $("#menubar").load("/topnav/index1.html");--태그 id=menubar인 곳에 /public/topnav.index1.html파일을 load한다.-->
     <!-- 즉, html문에 html문이 삽입되는 기능 -->
-    <!-- html문은 static file임. 그러므로 html파일은 public폴더에 있어야한다.어디서 불러 오는지 몰라서 2시간 멈게 헤멨다...ㅠㅠ -->
+    <!-- html문은 static file임. 그러므로 html파일은 public폴더에 있어야한다.어디서 불러 오는지 몰라서 2시간 넘게 헤멨다...ㅠㅠ -->
     <script type="text/javascript">
       $(document).ready(function() {
         $("#menubar").load("/topnav/index1.html");
@@ -61,10 +61,10 @@
         <a class="btn btn-sm btn-info" href="#" onclick="alert('코드 작성중 입니다.')"> Logout</a>
       </div>
     </header>
+    <!-- jquery문에 의해 메뉴바가 삽입되는 위치  -->
     <!-- header를 넣기위해 navbar 고정을 해제함 -->
     <!-- Fixed navbar -->
     <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark"> -->
-    <!-- jquery문에 의해 메뉴바가 삽입되는 위치  -->
     <nav>
       <div id="menubar"></div>
     </nav>
@@ -87,5 +87,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <!-- menubar JavaScript 메뉴빌더에서 생성된 것-->
     <script type="text/javascript" src="/topnav/index1_files/mbjsmbmcp.js"></script>
+    <script type="text/javascript" src="/javascripts/crawling.js"></script>
   </body>
 </html>

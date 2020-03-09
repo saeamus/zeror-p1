@@ -28,6 +28,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
+server.on("listening", menuCrawling);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -84,4 +85,8 @@ function onListening() {
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   console.log("./bin/www 으로 서버생성"); //20200227 consol 메세지 추가
   console.log("Listening on " + bind); //20200227 consol 메세지 추가
+}
+
+function menuCrawling() {
+  console.log("test");
 }

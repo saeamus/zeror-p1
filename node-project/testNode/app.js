@@ -15,7 +15,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var menuCrawling = require("./public/javascripts/crawling.js"); //menu crawling 모듈
 var app = express();
 
 //라우팅 모듈 선언
@@ -28,8 +28,10 @@ var mysqlDB = require("./conf/saeamus-db"); //db연결설정 모듈을 선언 ~/
 mysqlDB.connect(); //db를 연결 한다
 //db연결 테스트....query문을 실행하여 error여부 확인후 정상이면 콘솔에 "DB 연결성공" 출력한다.
 mysqlDB.query("SELECT * from members", function(err, rows, fields) {
-  if (!err) console.log("DB연결 성공");
-  else console.log("Error while performing Query.", err);
+  if (!err) {
+    console.log("DB연결 성공");
+    menuCrawling(); //db 연결까지 성공하면 menu item 변경사항을 update 한다.
+  } else console.log("Error while performing Query.", err);
 });
 //mysqlDB.connect(); //참고: db를 연결을 끊는 명령
 
