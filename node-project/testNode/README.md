@@ -1,16 +1,18 @@
-### 20200310 원래글 내용은 doc/004b.어플리케이션의 생성 및 폴더의 구조.md 로 이동하였습니다.
+#### 20200310 원래글 내용은 doc/004b.어플리케이션의 생성 및 폴더의 구조.md 로 이동하였습니다.
 
-### 앞으로 여기서는 작업 진행상황에 따라 commit되는 파일들에 대해 간략한 설명을 하도록 할 예정입니다.
+#### 앞으로 여기서는 작업 진행상황에 따라 commit되는 파일들에 대해 간략한 설명을 하도록 할 예정입니다.
 
 # 목차
 
-[1.commit명: slickgrid test on t1sub1sub1 menu](#slickgrid-test-on-t1sub1sub1-menu)
+[1.commit명: slickgrid test on t1sub1sub1 menu(1)](#slickgrid-test-on-t1sub1sub1-menu-1)
 
-[2.commit명: slickgrid on t1sub1sub1 menu with layout](#slickgrid-on-t1sub1sub1-menu-with-layout)
+[2.commit명: slickgrid test on t1sub1sub1 menu(2)](#slickgrid-on-t1sub1sub1-menu-2)
 
 # 설명
 
-# slickgrid test on t1sub1sub1 menu
+# slickgrid test on t1sub1sub1 menu 1
+
+commit을 한번에 처리해버려서 1,2차로 나누어서 설명합니다.
 
 #### 목적 :
 
@@ -37,7 +39,6 @@ slickgrid를 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니
         res.render("layout", { name: username, title: url2, content: t1sub1sub1_ren });
         });
 
-
         수정후
         res.render("layout-grid1", { name: username, title: url2, content: t1sub1sub1_ren });
         });
@@ -48,11 +49,11 @@ slickgrid를 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니
 
 6.  화면에 메뉴바 없이 grid가 뜨면 성공입니다.
 
-# slickgrid on t1sub1sub1 menu with layout
+# slickgrid on t1sub1sub1 menu 2
 
 #### 목적 :
 
-slickgrid를 layout을 적용하여 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니다.(1qjs commit과 다른 점은 페이지 상하단에 header, menu, footer 레이아웃이 적용되고 grid는 본문 영역에 보여집니다)
+slickgrid를 layout을 적용하여 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니다.(1번과 다른 점은 페이지 상하단에 header, menu, footer 레이아웃이 적용되고 grid는 본문 영역에 보여집니다)
 삽입할 Grid는 slickgrid의 simple예제입니다.  
  예제 링크:  
  <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
