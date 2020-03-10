@@ -4,22 +4,22 @@
 
 # 목차
 
-[1.commit: slickgrid test on t1sub1sub1 menu](#1.commit:-slickgrid-test-on-t1sub1sub1-menu)
+[1.commit명: slickgrid test on t1sub1sub1 menu](#slickgrid-test-on-t1sub1sub1-menu)
 
-[2.commit: slickgrid on t1sub1sub1 menu with layout](#2.commit:-slickgrid-on-t1sub1sub1-menu-with-layout)
+[2.commit명: slickgrid on t1sub1sub1 menu with layout](#slickgrid-on-t1sub1sub1-menu-with-layout)
 
 # 설명
 
-## 1.commit: slickgrid test on t1sub1sub1 menu
+# slickgrid test on t1sub1sub1 menu
 
-### 목적 :
+#### 목적 :
 
 slickgrid를 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니다.
 삽입할 Grid는 slickgrid의 simple예제입니다.  
  예제 링크:  
  <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
 
-### 설명 :
+#### 설명 :
 
 1.  slickgrid를 install 합니다.
 
@@ -48,16 +48,16 @@ slickgrid를 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니
 
 6.  화면에 메뉴바 없이 grid가 뜨면 성공입니다.
 
-## 2.commit: slickgrid on t1sub1sub1 menu with layout
+# slickgrid on t1sub1sub1 menu with layout
 
-### 목적 :
+#### 목적 :
 
 slickgrid를 layout을 적용하여 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니다.(1qjs commit과 다른 점은 페이지 상하단에 header, menu, footer 레이아웃이 적용되고 grid는 본문 영역에 보여집니다)
 삽입할 Grid는 slickgrid의 simple예제입니다.  
  예제 링크:  
  <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
 
-### 설명 :
+#### 설명 :
 
 1.  slickgrid를 install 합니다.(생략)
 
@@ -76,20 +76,21 @@ slickgrid를 layout을 적용하여 t1sub1sub1 메뉴페이지에 연결하기 �
     <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
     의 본문 부분만 복사해서 붙입니다.(여기서는 body의 table태그 부분만 복사함)
 
-4)  route/module.js에서 router.get("/t1sub1sub1" ....의 라우팅 부분을 아래와 같이 수정합니다.
+5.  route/module.js에서 router.get("/t1sub1sub1" ....의 라우팅 부분을 아래와 같이 수정합니다.
 
         수정전
         res.render("layout-grid1", { name: username, title: url2, content: t1sub1sub1_ren });
         });
 
-
         수정후
         res.render("layout-grid2", { name: username, title: url2, content: t1sub1sub1_ren });
         });
 
-5.  프로젝트를 실행합니다.
+6.  프로젝트를 실행합니다.
 
         npm start
 
-6.  화면과 같이 메뉴바와 함께 grid가 뜨면 성공입니다.  
+7.  화면과 같이 메뉴바와 함께 grid가 뜨면 성공입니다.  
     ![grid sample](../../Doc/images/menu/grid-sample.png)
+
+8.  서버 http://15.164.212.170:8000 에 접속해서 T1SUB1SUB1메뉴 페이지로 이동하면 확인 됩니다.
