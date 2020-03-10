@@ -1,88 +1,95 @@
-# 어플리케이션 생성 및 폴더의 구조
+### 20200310 원래글 내용은 doc/004b.어플리케이션의 생성 및 폴더의 구조.md 로 이동하였습니다.
 
-## 어플리케이션의 생성
+### 앞으로 여기서는 작업 진행상황에 따라 commit되는 파일들에 대해 간략한 설명을 하도록 할 예정입니다.
 
-### 1. Epxress란?
+# 목차
 
-Node는 Express, Koa, Hapi와 같은 프레임워크를 사용하여 개발할 수 있습니다.
+[1.commit: slickgrid test on t1sub1sub1 menu](#1.commit:-slickgrid-test-on-t1sub1sub1-menu)
 
-위의 프레임워크들이 개발에 필요한 다양한 기능들을 지원하기 때문에, 개발 생산성이 높아집니다.
+[2.commit: slickgrid on t1sub1sub1 menu with layout](#2.commit:-slickgrid-on-t1sub1sub1-menu-with-layout)
 
-### 2. Express 프레임워크 설치
+# 설명
 
-    $ npm install express --save
+## 1.commit: slickgrid test on t1sub1sub1 menu
 
-### 3. express-generator 모듈 설치
+### 목적 :
 
-express-generator 모듈로 어플리케이션을 생성하면 프로젝트 뼈대를 만들어 줍니다.(기본 폴더와 파일을 자동으로 생성합니다.)
-우선 exporess-generator 모듈은 내장 모듈이 아니므로, npm을 통해 모듈을 설치해야 합니다.
+slickgrid를 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니다.
+삽입할 Grid는 slickgrid의 simple예제입니다.  
+ 예제 링크:  
+ <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
 
-    $ npm install –g express-generator
+### 설명 :
 
-### 4. 어플리케이션 생성
+1.  slickgrid를 install 합니다.
 
-express-generator로 exercise라는 이름의 스켈레톤 애플리케이션을 생성합니다.
+        npm install slickgrid
 
-    $ express exercise --view=ejs
+2.  view 폴더에 테스트용으로 layout-grid1.ejs 파일을 생성하고
+    <https://github.com/6pac/SlickGrid/blob/master/examples/example1-simple.html>  
+    로부터 html source를 복사해서 붙입니다.
 
-실행 화면은 아래와 같습니다.
+3.  "head"와 "body"태그안의 link 되어있는 파일들을 local 폴더에 복사하고 경로를 수정합니다.
 
-![express](./public/images/express_gen.png)
+4.  route/module.js에서 router.get("/t1sub1sub1" ....의 라우팅 부분을 아래와 같이 수정합니다.
 
-exercise라는 폴더 아래에 그림과 같이 기본 폴더와 파일들이 생성됩니다.
+        수정전
+        res.render("layout", { name: username, title: url2, content: t1sub1sub1_ren });
+        });
 
-![express](./public/images/basic_folder.png)
 
-### 5. 어플리케이션의 실행
+        수정후
+        res.render("layout-grid1", { name: username, title: url2, content: t1sub1sub1_ren });
+        });
 
-아래 명령을 실행하면 어플리케이션이 실행됩니다.
+5.  프로젝트를 실행합니다.
 
-    $ cd exercise
-    $ npm install
-    $ npm start
+        npm start
 
-어플리케이션이 실행되고 웹브라우저에서 localhost:3000으로 접속하면 아래와 같은 화면이 출력됩니다. 이는 서버가 정상 설치 된 것이며 이제 여러분의 의도대로 프로그램을 수정 작성하면 됩니다.
+6.  화면에 메뉴바 없이 grid가 뜨면 성공입니다.
 
-![express](./public/images/express_screen.png)
+## 2.commit: slickgrid on t1sub1sub1 menu with layout
 
-#### npm install을 하는 이유
+### 목적 :
 
-package.json 파일에 dependencies 프로퍼티에 필요한 모듈들이 정의되어 있습니다.
+slickgrid를 layout을 적용하여 t1sub1sub1 메뉴페이지에 연결하기 위한 test 작업입니다.(1qjs commit과 다른 점은 페이지 상하단에 header, menu, footer 레이아웃이 적용되고 grid는 본문 영역에 보여집니다)
+삽입할 Grid는 slickgrid의 simple예제입니다.  
+ 예제 링크:  
+ <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
 
-이 모듈들은 express-generator가 생성해준 것입니다.
+### 설명 :
 
-npm install명령어를 실행하면, package.json 파일의 dependencies 프로퍼티를 보고 모듈을 설치합니다.
+1.  slickgrid를 install 합니다.(생략)
 
-즉, dependencies 에는 모듈을 사용하겠다고 선언만 한 것이고, 진짜로 설치를 하려면 npm install을 해주어야 합니다.
+        npm install slickgrid
 
-## 어플리케이션 폴더의 구조 및 역할
+2.  view 폴더에 테스트용으로 layout-grid2.ejs 파일을 생성하고
+    <https://github.com/6pac/SlickGrid/blob/master/examples/example1-simple.html>  
+    로부터 html source를 복사해서 붙입니다.
 
-express-generator로 애플리케이션을 생성하면, 아래와 같은 폴더/파일들이 자동으로 추가됩니다.
+    view/layout.ejs의 내용을 layout-grid2.ejs에 복사해서 추가로 붙입니다.
 
-#### bin 폴더
+3.  각 "head"와 "body"태그안의 link 되어있는 파일들을 하나의 html문서로 합칩니다.
 
-프로그램의 실행과 관련된 파일이 있는 폴더입니다.
-www 파일을 실행해서 서버가 실행됩니다.  
-현재 testNode 어플리케이션에서는 App.js파일에 서버가 꾸며져 있습니다.
+4.  view/m-t1sub1sub1.ejs파일의 내용을  
+    예제 링크:  
+    <http://6pac.github.io/SlickGrid/examples/example1-simple.html>
+    의 본문 부분만 복사해서 붙입니다.(여기서는 body의 table태그 부분만 복사함)
 
-#### pulbic 폴더
+4)  route/module.js에서 router.get("/t1sub1sub1" ....의 라우팅 부분을 아래와 같이 수정합니다.
 
-JS, CSS, img 파일 등 리소스 파일이 있는 폴더
+        수정전
+        res.render("layout-grid1", { name: username, title: url2, content: t1sub1sub1_ren });
+        });
 
-#### routes 폴더
 
-라우터와 관련된 모듈이 있는 폴더
+        수정후
+        res.render("layout-grid2", { name: username, title: url2, content: t1sub1sub1_ren });
+        });
 
-#### views 폴더
+5.  프로젝트를 실행합니다.
 
-ejs 파일과 같은 템플릿 파일이 있는 폴더  
-브라우저로 전송되는 view파일을 모아 놓은 폴더
+        npm start
 
-#### app.js 파일
-
-애플리케이션에서 중심이 되는 파일  
-서버 설정 / 미들웨어 정의 / 라우트 정의 등 여러가지를 설정하고, 서버 운영을 위한 로직을 작성합니다.
-
-#### package.json
-
-현재 애플리케이션과 관련된 정보와 필요한 모듈들을 작성해 놓은 파일 npm install 을 실행하면 dependencies 항목에 작성되 있는 모듈들이 PC에 설치된다.
+6.  화면과 같이 메뉴바와 함께 grid가 뜨면 성공입니다.  
+    ![grid sample](../../Doc/images/menu/grid-sample.png)

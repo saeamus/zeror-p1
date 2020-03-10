@@ -33,6 +33,7 @@ var t3sub5sub3 = fs.readFileSync("./views/m-t3sub5sub3.ejs", "utf8");
 var t3sub6 = fs.readFileSync("./views/m-t3sub6.ejs", "utf8");
 
 var t4 = fs.readFileSync("./views/m-t4.ejs", "utf8");
+
 // //원래 메뉴화면 라우팅
 // //menu 화면으로 라우팅
 // router.get("/t1sub1sub1", function(req, res, next) {
