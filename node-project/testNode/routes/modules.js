@@ -33,15 +33,36 @@ var t3sub5sub3 = fs.readFileSync("./views/m-t3sub5sub3.ejs", "utf8");
 var t3sub6 = fs.readFileSync("./views/m-t3sub6.ejs", "utf8");
 
 var t4 = fs.readFileSync("./views/m-t4.ejs", "utf8");
+// //원래 메뉴화면 라우팅
+// //menu 화면으로 라우팅
+// router.get("/t1sub1sub1", function(req, res, next) {
+//   var url = req.url;
+//   var url1 = url.replace("/", "");
+//   var url2 = url1.toUpperCase();
+//   console.log(url2);
+//   var t1sub1sub1_ren = ejs.render(t1sub1sub1, { title: url2 }); //title값을 넘기기위해서 m-t1sub1sub1.ejs를 미리 랜더링
+//   res.render("layout", { name: username, title: url2, content: t1sub1sub1_ren });
+// });
 
-//menu 화면으로 라우팅
+// //layout-grid1.ejs로 라우팅
+// router.get("/t1sub1sub1", function(req, res, next) {
+//   var url = req.url;
+//   var url1 = url.replace("/", "");
+//   var url2 = url1.toUpperCase();
+//   console.log(url2);
+//   var t1sub1sub1_ren = ejs.render(t1sub1sub1, { title: url2 }); //title값을 넘기기위해서 m-t1sub1sub1.ejs를 미리 랜더링
+//   res.render("layout-grid1", { name: username, title: url2, content: t1sub1sub1_ren });
+// });
+
+//layout-grid2.ejs로 라우팅
+//layout-grid1과 layout-grid2의 차이점은 layout-grid2는 header와 navbar 적용
 router.get("/t1sub1sub1", function(req, res, next) {
   var url = req.url;
   var url1 = url.replace("/", "");
   var url2 = url1.toUpperCase();
   console.log(url2);
   var t1sub1sub1_ren = ejs.render(t1sub1sub1, { title: url2 }); //title값을 넘기기위해서 m-t1sub1sub1.ejs를 미리 랜더링
-  res.render("layout", { name: username, title: url2, content: t1sub1sub1_ren });
+  res.render("layout-grid2", { name: username, title: url2, content: t1sub1sub1_ren });
 });
 //menu 화면으로 라우팅
 router.get("/t1sub1sub2", function(req, res, next) {

@@ -1,0 +1,99 @@
+<!-- file:layout-grid2.ejs
+     작성:20200303 james
+     설명:
+     slick grid test용
+     grid를 t1sub1sub1 page에 연결 test용-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout</title>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <!-- <link rel="shortcut icon" type="image/ico" href="favicon.ico" /> -->
+    <!-- <title>SlickGrid example 1: Basic grid</title> -->
+    <link rel="stylesheet" href="/stylesheets/slick.grid.css" type="text/css" />
+    <link rel="stylesheet" href="/css/smoothness/jquery-ui.css" type="text/css" />
+    <link rel="stylesheet" href="/stylesheets/examples.css" type="text/css" />
+    <!--favicon 설정 -->
+    <link rel="icon" href="/ico/icons8-ship-wheel-48.png" />
+    <!--bootstarp CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous" />
+    <!-- 무료 icon CSS 여기서 사용하는 icon은 https://fontawesome.com/v4.7.0/icons/에서 다운받은 것임-->
+    <link rel="stylesheet" href="/ico/font-awesome/css/font-awesome.min.css" />
+    <!-- header, nav, footer등 layout 설정용 CSS -->
+    <link type="text/css" href="/stylesheets/sticky-footer-navbar.css" rel="stylesheet" />
+    <!--main 설정용 CSS-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <!-- 메뉴바 설정용 CSS 메뉴빌더에서 생성된 것-->
+    <link rel="stylesheet" href="/topnav/index1_files/mbcsmbmcp.css" type="text/css" />
+    <!-- 아래 메뉴바를 삽입하기위한 jqurey문을 실행하기위해 jquery script를 먼저 실행한다 -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- 메뉴바 html문을 삽입하기위한 script-->
+    <!--  $(document).ready(function()--브라우저가 웹페이지 로딩을 마치면 jquery문이 실행된다-->
+    <!-- $("#menubar").load("/topnav/index1.html");--태그 id=menubar인 곳에 /public/topnav.index1.html파일을 load한다.-->
+    <!-- 즉, html문에 html문이 삽입되는 기능 -->
+    <!-- html문은 static file임. 그러므로 html파일은 public폴더에 있어야한다.어디서 불러 오는지 몰라서 2시간 넘게 헤멨다...ㅠㅠ -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#menubar").load("/topnav/index1.html");
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <div class="d-flex flex-column flex-md-row align-items-center px-md-4 border-bottom box-shadow bg-secondary text-white">
+        <h6 class="my-0 mr-md-auto font-weight-bold">SAEAMUS</h6>
+
+        <h6 class="text-capitalize my-0  font-weight-bold">
+          <!-- ejs엔진 형식, 라우터로부터 넘겨 받은 name 파라메터를 화면에 나타냄 -->
+          <i class="fa fa-user-circle " aria-hidden="true">
+            <%= name %>님을 환영합니다.
+          </i>
+        </h6>
+        <a class="btn btn-sm btn-info" href="#" onclick="alert('코드 작성중 입니다.')"> Logout</a>
+      </div>
+    </header>
+    <!-- jquery문에 의해 메뉴바가 삽입되는 위치  -->
+    <!-- header를 넣기위해 navbar 고정을 해제함 -->
+    <!-- Fixed navbar -->
+    <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark"> -->
+    <nav>
+      <div id="menubar"></div>
+    </nav>
+
+    <!-- 본문 영역, 여기에 각 모듈별 content를 작성 -->
+    <main role="main" class="container">
+      <p><%-content%></p>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
+
+    <!-- popper core JavaScript -->
+    <script src="/javascripts/popper.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <!-- menubar JavaScript 메뉴빌더에서 생성된 것-->
+    <script type="text/javascript" src="/topnav/index1_files/mbjsmbmcp.js"></script>
+    <script type="text/javascript" src="/javascripts/crawling.js"></script>
+    <script src="/lib/jquery-1.12.4.min.js"></script>
+    <script src="/lib/jquery.event.drag-2.3.0.js"></script>
+
+    <script src="/javascripts/slick.core.js"></script>
+    <script src="/javascripts/slick.grid.js"></script>
+  </body>
+</html>
