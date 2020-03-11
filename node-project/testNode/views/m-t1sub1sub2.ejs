@@ -1,9 +1,74 @@
-<!-- file:m-t1sub1sub1.ejs
+<!-- file:m-t1sub1sub2.ejs
      작성:20200303 james
      설명:
      T1 sub1 sub2 메뉴 화면.
      바탕은 layout.ejs 이고
-     <main>태그 부분만 작성하면 된다-->
-<h1 style="text-align: center">T1 SUB1 SUB2 메뉴 화면 입니다</h1>
+     <main>태그 부분만 작성하면 된다
+     index1.html에서 메뉴선택시 /modules/t1sub1sub2로 먼저 라우팅되고
+     아래 script에서 AJAX 로 get할때 /modules/t1sub1sub2/get으로 라우팅되어 
+     db에서 data를 가져온다-->
+
+<!--공사중일때의 메뉴화면 코드  -->
+<!-- <h1 style="text-align: center">T1 SUB1 SUB2 메뉴 화면 입니다</h1>
 <h1 style="text-align: center">코드 작성중 입니다.</h1>
-<img src="/images/maintenance-2422173_400.jpg" alt="My Image" style="margin-left: auto; margin-right: auto; display: block;" />
+<img src="/images/maintenance-2422173_400.jpg" alt="My Image" style="margin-left: auto; margin-right: auto; display: block;" /> -->
+
+<!-- slickgrid로 db 연결하여 데이타 가져옴 -->
+<h1>DB table에서 data로딩</h1>
+<table width="100%">
+  <tr>
+    <td valign="top" width="50%">
+      <div id="myGrid" style="width:600px;height:500px;"></div>
+    </td>
+  </tr>
+</table>
+
+<script src="/lib/jquery-1.12.4.min.js"></script>
+<script src="/lib/jquery.event.drag-2.3.0.js"></script>
+
+<script src="/javascripts/slick.core.js"></script>
+<script src="/javascripts/slick.grid.js"></script>
+
+<script>
+  var grid;
+  var columns = [
+    { id: "id", name: "ID", field: "id" },
+    { id: "name", name: "Name", field: "name" },
+    { id: "location", name: "Location", field: "location" }
+  ];
+
+  var options = {
+    enableCellNavigation: true,
+    enableColumnReorder: false
+  };
+
+  $(function() {
+    var griddata = [];
+
+    //Ajax GET Method TEST
+    $.ajax({
+      url: "/modules/t1sub1sub2/get", // modules/t1sub1sub2/get으로 라우팅
+      async: false, // async:true이면 javascript 특성상 db에서 data를 가져오기 전에 grid를 그려버린다.그러면 data로딩 안됨.
+      dataType: "json",
+      type: "GET",
+      //data: { data: get },
+      success: function(result) {
+        if (result) {
+          //console.log(result);
+          //console.log(result.length);
+          //console.log(result[0].name);
+          for (var i = 0; i < result.length; i++) {
+            griddata[i] = {
+              id: result[i].id,
+              name: result[i].name,
+              location: result[i].location
+            };
+          }
+          //console.log(griddata[2].name);
+        }
+      }
+    });
+
+    grid = new Slick.Grid("#myGrid", griddata, columns, options);
+  });
+</script>
