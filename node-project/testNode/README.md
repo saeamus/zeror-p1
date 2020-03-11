@@ -8,6 +8,8 @@
 
 [2.commit명: slickgrid test on t1sub1sub1 menu(2)](#slickgrid-on-t1sub1sub1-menu-2)
 
+[3.commit명: T1SUB1SUB2 페이지에 db table로 부터 Grid 띄우기](#t1sub1sub2-grid-from-db-table)
+
 # 설명
 
 # slickgrid test on t1sub1sub1 menu 1
@@ -95,3 +97,14 @@ slickgrid를 layout을 적용하여 t1sub1sub1 메뉴페이지에 연결하기 �
     ![grid sample](../../Doc/images/menu/grid-sample.png)
 
 8.  서버 http://15.164.212.170:8000 에 접속해서 T1SUB1SUB1메뉴 페이지로 이동하면 확인 됩니다.
+
+# T1SUB1SUB2 grid from db table
+
+#### 목적
+
+T1SUB1SUB2 메뉴 페이지에
+DB table로 부터 data를 불러들여 grid를 만드는 작업입니다.
+
+#### 설명
+
+코드 작성중 입니다...
