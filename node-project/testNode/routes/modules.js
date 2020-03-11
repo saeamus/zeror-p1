@@ -10,7 +10,6 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const ejs = require("ejs");
-var mysqlDB = require("../conf/saeamus-db");
 
 var t1sub1sub1 = fs.readFileSync("./views/m-t1sub1sub1.ejs", "utf8");
 var t1sub1sub2 = fs.readFileSync("./views/m-t1sub1sub2.ejs", "utf8");
@@ -66,28 +65,11 @@ router.get("/t1sub1sub1", function(req, res, next) {
   var t1sub1sub1_ren = ejs.render(t1sub1sub1, { title: url2 }); //title값을 넘기기위해서 m-t1sub1sub1.ejs를 미리 랜더링
   res.render("layout-grid2", { name: username, title: url2, content: t1sub1sub1_ren });
 });
-
-//t1sub1sub2 menu 기본화면으로 먼저 라우팅
-router.get("/t1sub1sub2", function(req, res) {
+//menu 화면으로 라우팅
+router.get("/t1sub1sub2", function(req, res, next) {
   var t1sub1sub2_ren = ejs.render(t1sub1sub2, { title: "T1 SUB1 SUB2" }); //title값을 넘기기위해서 m-t1sub1sub2.ejs를 미리 랜더링
-  res.render("layout-grid2", { name: username, title: "T1 SUB1 SUB2", content: t1sub1sub2_ren });
+  res.render("layout", { name: username, title: "T1 SUB1 SUB2", content: t1sub1sub2_ren });
 });
-//AJAX GET METHOD로 db에서 data가져옴
-router.get("/t1sub1sub2/get", function(req, res) {
-  var sql = "select * from temp_table";
-  mysqlDB.query(sql, function(err, results) {
-    if (err) {
-      res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
-    }
-    if (!results[0]) {
-      res.send("nodata"); //query 결과가 undefined 즉, db에 userId가 없는 경우, 화면에  메세지 출력 (~/views/nodata.ejs)
-    }
-    //console.log(results);
-    res.send(results); //제목없이 리턴함,만일 res.send({ttt:results}); 이리하면 ttt란 이름으로 결과값이 리턴됨.
-    //이경우 받는 script에서 result.ttt[0].id 이런식으로 받아야함
-  });
-});
-
 //menu 화면으로 라우팅
 router.get("/t1sub1sub3", function(req, res, next) {
   var t1sub1sub3_ren = ejs.render(t1sub1sub3, { title: "T1 SUB1 SUB3" });

@@ -10,8 +10,6 @@
 
 [3.commit명: T1SUB1SUB2 페이지에 db table로 부터 Grid 띄우기](#t1sub1sub2-grid-from-db-table)
 
-[4.commit명: T1SUB1SUB3 페이지 Grid에서 db CRUD 구현 ](#t1sub1sub3-grid-crud)
-
 # 설명
 
 # slickgrid test on t1sub1sub1 menu 1
@@ -109,86 +107,4 @@ DB table로 부터 data를 불러들여 grid를 만드는 작업입니다.
 
 #### 설명
 
-1.  AWS db에 temp_table(column = id,name,location)을 만들고 data를 몇개 입력합니다.
-
-    ![temp_table](../../Doc/images/menu/dbtable.png)
-
-2.  m1-t1sub1sub2.ejs 파일을 아래와 같이 수정합니다.
-
-    AJAX get을 사용하여 db의 data를 불러 옵니다.  
-    ajax에서 async:true이면 javascript 특성상 db에서 data를 가져오기 전에 아래 라인을 실행해서 grid를 그려버립니다.그러면 나중에 data를 가져와도 로딩 안됩니다.무조건 async:false로 셋팅해야합니다.
-    기본페이지가 그려진후 grid를 그리기위해 별도의 modules/t1sub1sub2/get으로 라우팅합니다.
-
-         <script>
-            var grid;
-            var columns = [
-                 { id: "id", name: "ID", field: "id" },
-                 { id: "name", name: "Name", field: "name" },
-                 { id: "location", name: "Location", field: "location" }
-            ];
-
-            var options = {
-                 enableCellNavigation: true,
-                 enableColumnReorder: false
-            };
-
-            $(function() {
-            var griddata = [];
-
-            //Ajax GET Method TEST
-            $.ajax({
-                 url: "/modules/t1sub1sub2/get",
-                 async: false,
-                 dataType: "json",
-                 type: "GET",
-                 //data: { data: get },
-                 success: function(result) {
-                    if (result) {
-                         //console.log(result);
-                         //console.log(result.length);
-                         //console.log(result[0].name);
-                         for (var i = 0; i < result.length; i++) {
-                            griddata[i] = {
-                                 id: result[i].id,
-                                 name: result[i].name,
-                                 location: result[i].location
-                            };
-                         }
-                         //console.log(griddata[2].name);
-                    }
-                 }
-            });
-
-            grid = new Slick.Grid("#myGrid", griddata, columns, options);
-         });
-         </script>
-
-3.  modules.js파일을 아래와 같이 수정합니다.
-    AJAX GET METHOD로 라우팅되어 db의 temp_table에서 data를가져옵니다.
-
-         router.get("/t1sub1sub2/get", function(req, res) {
-         var sql = "select * from temp_table";
-         mysqlDB.query(sql, function(err, results) {
-            if (err) {
-                 res.send("error : " + err);
-            }
-            if (!results[0]) {
-                 res.send("nodata");
-            }
-            //console.log(results);
-            res.send(results);
-           });
-         });
-
-4)  화면과 같이 메뉴바와 함께 db에서 불러온 data로 grid가 뜨면 성공입니다.  
-    ![grid sample](../../Doc/images/menu/grid-from-db.png)
-
-# T1SUB1SUB3 GRID CRUD
-
-#### 목적
-
-T1SUB1SUB3 메뉴 페이지에 Grid상에서 CRUD를 구현합니다.
-
-#### 설명
-
-코드 작성중입니다....
+코드 작성중 입니다...
