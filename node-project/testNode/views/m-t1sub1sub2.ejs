@@ -45,7 +45,7 @@
   $(function() {
     var griddata = [];
 
-    //Ajax GET Method TEST
+    //Ajax GET Method로 db temp_table에서 data read
     $.ajax({
       url: "/modules/t1sub1sub2/get", // modules/t1sub1sub2/get으로 라우팅
       async: false, // async:true이면 javascript 특성상 db에서 data를 가져오기 전에 grid를 그려버린다.그러면 data로딩 안됨.

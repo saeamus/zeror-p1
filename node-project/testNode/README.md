@@ -111,7 +111,7 @@ DB table로 부터 data를 불러들여 grid를 만드는 작업입니다.
 
 1.  AWS db에 temp_table(column = id,name,location)을 만들고 data를 몇개 입력합니다.
 
-    ![temp_table](../../Doc/images/menu/dbtable.png)
+    ![temp_table](../../Doc/images/menu/temp_table.png)
 
 2.  m1-t1sub1sub2.ejs 파일을 아래와 같이 수정합니다.
 
@@ -181,13 +181,13 @@ DB table로 부터 data를 불러들여 grid를 만드는 작업입니다.
          });
 
 4)  화면과 같이 메뉴바와 함께 db에서 불러온 data로 grid가 뜨면 성공입니다.  
-    ![grid sample](../../Doc/images/menu/grid-from-db.png)
+    ![grid sample](../../Doc/images/menu/grid-from-dbtable.png)
 
 # T1SUB1SUB3 GRID CRUD
 
 #### 목적
 
-T1SUB1SUB3 메뉴 페이지에 Grid상에서 CRUD를 구현합니다.
+T1SUB1SUB3 메뉴페이지에 Grid상에서 CRUD를 구현합니다.
 
 #### 설명
 
