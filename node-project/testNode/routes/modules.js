@@ -88,11 +88,28 @@ router.get("/t1sub1sub2/get", function(req, res) {
   });
 });
 
-//menu 화면으로 라우팅
+//t1sub1sub3 menu 화면으로 라우팅
 router.get("/t1sub1sub3", function(req, res, next) {
   var t1sub1sub3_ren = ejs.render(t1sub1sub3, { title: "T1 SUB1 SUB3" });
-  res.render("layout", { name: username, title: "T1 SUB1 SUB3", content: t1sub1sub3_ren });
+  res.render("layout-grid2", { name: username, title: "T1 SUB1 SUB3", content: t1sub1sub3_ren });
 });
+
+//AJAX GET METHOD로 db에서 data가져옴
+router.get("/t1sub1sub3/get", function(req, res) {
+  var sql = "select * from temp_table";
+  mysqlDB.query(sql, function(err, results) {
+    if (err) {
+      res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
+    }
+    if (!results[0]) {
+      res.send("nodata"); //query 결과가 undefined 즉, db에 userId가 없는 경우, 화면에  메세지 출력 (~/views/nodata.ejs)
+    }
+    //console.log(results);
+    res.send(results); //제목없이 리턴함,만일 res.send({ttt:results}); 이리하면 ttt란 이름으로 결과값이 리턴됨.
+    //이경우 받는 script에서 result.ttt[0].id 이런식으로 받아야함
+  });
+});
+
 //menu 화면으로 라우팅
 router.get("/t1sub1sub4", function(req, res, next) {
   var t1sub1sub4_ren = ejs.render(t1sub1sub4, { title: "T1 SUB1 SUB4" });

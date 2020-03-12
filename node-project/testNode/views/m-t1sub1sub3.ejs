@@ -5,6 +5,83 @@
      바탕은 layout.ejs 이고
      <main>태그 부분만 작성하면 된다-->
 
-<h1 style="text-align: center"><%= title %> 메뉴 화면 입니다</h1>
+<!-- <h1 style="text-align: center"><%= title %> 메뉴 화면 입니다</h1>
 <h1 style="text-align: center">코드 작성중 입니다.</h1>
-<img src="/images/maintenance-2422173_400.jpg" alt="My Image" style="margin-left: auto; margin-right: auto; display: block;" />
+<img src="/images/maintenance-2422173_400.jpg" alt="My Image" style="margin-left: auto; margin-right: auto; display: block;" /> -->
+
+<!-- slickgrid로 db 연결하여 데이타 가져옴 -->
+<h1>DB table에서 data로딩</h1>
+<table width="100%">
+  <tr>
+    <td valign="top" width="50%">
+      <div id="myGrid" style="width:600px;height:500px;"></div>
+    </td>
+  </tr>
+</table>
+
+<script src="/lib/jquery-1.12.4.min.js"></script>
+<script src="/lib/jquery.event.drag-2.3.0.js"></script>
+
+<script src="/javascripts/slick.core.js"></script>
+<script src="/javascripts/slick.grid.js"></script>
+
+<script>
+  var grid;
+  var columns = [
+    { id: "id", name: "ID", field: "id" },
+    { id: "name", name: "Name", field: "name" },
+    { id: "location", name: "Location", field: "location" },
+    { id: "occupation", name: "Occupation", field: "occupation" },
+    { id: "hobby1", name: "Hobby1", field: "hobby1" },
+    { id: "hobby2", name: "Hobby2", field: "hobby2" },
+    { id: "hobby3", name: "hobby3", field: "hobby3" },
+    { id: "phone", name: "Phone", field: "phone" },
+    { id: "address", name: "Address", field: "address" },
+    { id: "reg_id", name: "Reg_id", field: "reg_id" },
+    { id: "upd_id", name: "Upd_id", field: "upd_id" }
+  ];
+
+  var options = {
+    enableCellNavigation: true,
+    enableColumnReorder: false
+  };
+
+  $(function() {
+    var griddata = [];
+
+    //Ajax GET Method로 db temp_table에서 data read
+    $.ajax({
+      url: "/modules/t1sub1sub3/get", // modules/t1sub1sub2/get으로 라우팅
+      async: false, // async:true이면 javascript 특성상 db에서 data를 가져오기 전에 grid를 그려버린다.그러면 data로딩 안됨.
+      dataType: "json",
+      type: "GET",
+      //data: { data: get },
+      success: function(result) {
+        if (result) {
+          //console.log(result);
+          //console.log(result.length);
+          //console.log(result[0].name);
+          for (var i = 0; i < result.length; i++) {
+            griddata[i] = {
+              id: result[i].id,
+              name: result[i].name,
+              location: result[i].location,
+              occupation: result[i].occupation,
+              hobby1: result[i].hobby1,
+              hobby2: result[i].hobby2,
+              hobby3: result[i].hobby3,
+              phone: result[i].phone,
+              address: result[i].address,
+              reg_id: result[i].reg_id,
+              upd_id: result[i].upd_id
+              //column의 field명에 매칭시킨다.
+            };
+          }
+          //console.log(griddata[2].name);
+        }
+      }
+    });
+
+    grid = new Slick.Grid("#myGrid", griddata, columns, options);
+  });
+</script>

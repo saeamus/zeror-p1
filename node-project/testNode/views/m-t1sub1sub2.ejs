@@ -34,7 +34,15 @@
   var columns = [
     { id: "id", name: "ID", field: "id" },
     { id: "name", name: "Name", field: "name" },
-    { id: "location", name: "Location", field: "location" }
+    { id: "location", name: "Location", field: "location" },
+    { id: "occupation", name: "Occupation", field: "occupation" },
+    { id: "hobby1", name: "Hobby1", field: "hobby1" },
+    { id: "hobby2", name: "Hobby2", field: "hobby2" },
+    { id: "hobby3", name: "hobby3", field: "hobby3" },
+    { id: "phone", name: "Phone", field: "phone" },
+    { id: "address", name: "Address", field: "address" },
+    { id: "reg_id", name: "Reg_id", field: "reg_id" },
+    { id: "upd_id", name: "Upd_id", field: "upd_id" }
   ];
 
   var options = {
@@ -61,7 +69,16 @@
             griddata[i] = {
               id: result[i].id,
               name: result[i].name,
-              location: result[i].location
+              location: result[i].location,
+              occupation: result[i].occupation,
+              hobby1: result[i].hobby1,
+              hobby2: result[i].hobby2,
+              hobby3: result[i].hobby3,
+              phone: result[i].phone,
+              address: result[i].address,
+              reg_id: result[i].reg_id,
+              upd_id: result[i].upd_id
+              //column의 field명에 매칭시킨다.
             };
           }
           //console.log(griddata[2].name);
