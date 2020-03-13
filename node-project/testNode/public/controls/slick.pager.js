@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
   function SlickGridPager(dataView, grid, $container, options) {
     var $status;
     var _options;
@@ -6,11 +6,11 @@
       showAllText: "Showing all {rowCount} rows",
       showPageText: "Showing page {pageNum} of {pageCount}"
     };
-    
+
     function init() {
       _options = $.extend(true, {}, _defaults, options);
-      
-      dataView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
+
+      dataView.onPagingInfoChanged.subscribe(function(e, pagingInfo) {
         updatePager(pagingInfo);
       });
 
@@ -36,33 +36,33 @@
       dataView.setRefreshHints({
         isFilterUnchanged: true
       });
-      dataView.setPagingOptions({pageSize: n});
+      dataView.setPagingOptions({ pageSize: n });
     }
 
     function gotoFirst() {
       if (getNavState().canGotoFirst) {
-        dataView.setPagingOptions({pageNum: 0});
+        dataView.setPagingOptions({ pageNum: 0 });
       }
     }
 
     function gotoLast() {
       var state = getNavState();
       if (state.canGotoLast) {
-        dataView.setPagingOptions({pageNum: state.pagingInfo.totalPages - 1});
+        dataView.setPagingOptions({ pageNum: state.pagingInfo.totalPages - 1 });
       }
     }
 
     function gotoPrev() {
       var state = getNavState();
       if (state.canGotoPrev) {
-        dataView.setPagingOptions({pageNum: state.pagingInfo.pageNum - 1});
+        dataView.setPagingOptions({ pageNum: state.pagingInfo.pageNum - 1 });
       }
     }
 
     function gotoNext() {
       var state = getNavState();
       if (state.canGotoNext) {
-        dataView.setPagingOptions({pageNum: state.pagingInfo.pageNum + 1});
+        dataView.setPagingOptions({ pageNum: state.pagingInfo.pageNum + 1 });
       }
     }
 
@@ -73,10 +73,11 @@
       var $settings = $("<span class='slick-pager-settings' />").appendTo($container);
       $status = $("<span class='slick-pager-status' />").appendTo($container);
 
-      $settings
-          .append("<span class='slick-pager-settings-expanded' style='display:none'>Show: <a data=0>All</a><a data='-1'>Auto</a><a data=25>25</a><a data=50>50</a><a data=100>100</a></span>");
+      $settings.append(
+        "<span class='slick-pager-settings-expanded' style='display:none'>Show: <a data=0>All</a><a data='-1'>Auto</a><a data=25>25</a><a data=50>50</a><a data=100>100</a></span>"
+      );
 
-      $settings.find("a[data]").click(function (e) {
+      $settings.find("a[data]").click(function(e) {
         var pagesize = $(e.target).attr("data");
         if (pagesize !== undefined) {
           if (pagesize == -1) {
@@ -92,35 +93,33 @@
       var icon_suffix = "' /></span>";
 
       $(icon_prefix + "ui-icon-lightbulb" + icon_suffix)
-          .click(function () {
-            $(".slick-pager-settings-expanded").toggle();
-          })
-          .appendTo($settings);
+        .click(function() {
+          $(".slick-pager-settings-expanded").toggle();
+        })
+        .appendTo($settings);
 
       $(icon_prefix + "ui-icon-seek-first" + icon_suffix)
-          .click(gotoFirst)
-          .appendTo($nav);
+        .click(gotoFirst)
+        .appendTo($nav);
 
       $(icon_prefix + "ui-icon-seek-prev" + icon_suffix)
-          .click(gotoPrev)
-          .appendTo($nav);
+        .click(gotoPrev)
+        .appendTo($nav);
 
       $(icon_prefix + "ui-icon-seek-next" + icon_suffix)
-          .click(gotoNext)
-          .appendTo($nav);
+        .click(gotoNext)
+        .appendTo($nav);
 
       $(icon_prefix + "ui-icon-seek-end" + icon_suffix)
-          .click(gotoLast)
-          .appendTo($nav);
+        .click(gotoLast)
+        .appendTo($nav);
 
-      $container.find(".ui-icon-container")
-          .hover(function () {
-            $(this).toggleClass("ui-state-hover");
-          });
+      $container.find(".ui-icon-container").hover(function() {
+        $(this).toggleClass("ui-state-hover");
+      });
 
       $container.children().wrapAll("<div class='slick-pager' />");
     }
-
 
     function updatePager(pagingInfo) {
       var state = getNavState();
@@ -140,9 +139,15 @@
       }
 
       if (pagingInfo.pageSize === 0) {
-        $status.text(_options.showAllText.replace('{rowCount}', pagingInfo.totalRows + "").replace('{pageCount}', pagingInfo.totalPages + ""));
+        $status.text(
+          _options.showAllText.replace("{rowCount}", pagingInfo.totalRows + "").replace("{pageCount}", pagingInfo.totalPages + "")
+        );
       } else {
-        $status.text(_options.showPageText.replace('{pageNum}', pagingInfo.pageNum + 1 + "").replace('{pageCount}', pagingInfo.totalPages + ""));
+        $status.text(
+          _options.showPageText
+            .replace("{pageNum}", pagingInfo.pageNum + 1 + "")
+            .replace("{pageCount}", pagingInfo.totalPages + "")
+        );
       }
     }
 
@@ -150,5 +155,5 @@
   }
 
   // Slick.Controls.Pager
-  $.extend(true, window, { Slick:{ Controls:{ Pager:SlickGridPager }}});
+  $.extend(true, window, { Slick: { Controls: { Pager: SlickGridPager } } });
 })(jQuery);
