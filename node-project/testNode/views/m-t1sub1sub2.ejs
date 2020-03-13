@@ -23,14 +23,29 @@
   </tr>
 </table>
 
-<script src="/lib/jquery-1.12.4.min.js"></script>
+<script src="/lib/firebugx.js"></script>
+
+<!-- <script src="/lib/jquery-1.12.4.min.js"></script> -->
+<script src="/lib/jquery-ui.min.js"></script>
 <script src="/lib/jquery.event.drag-2.3.0.js"></script>
 
-<script src="/javascripts/slick.core.js"></script>
-<script src="/javascripts/slick.grid.js"></script>
+<script src="/controls/slick.core.js"></script>
+<script src="/plugins/slick.cellrangedecorator.js"></script>
+<script src="/plugins/slick.cellrangeselector.js"></script>
+<script src="/plugins/slick.cellselectionmodel.js"></script>
+<script src="/controls/slick.formatters.js"></script>
+<script src="/controls/slick.editors.js"></script>
+<script src="/controls/slick.grid.js"></script>
+
+<script src="/plugins/slick.rowselectionmodel.js"></script>
+
+<script src="/controls/slick.dataview.js"></script>
+<script src="/controls/slick.pager.js"></script>
+<script src="/controls/slick.columnpicker.js"></script>
 
 <script>
   var grid;
+  var data = [];
   var columns = [
     { id: "id", name: "ID", field: "id" },
     { id: "name", name: "Name", field: "name" },
@@ -40,9 +55,15 @@
     { id: "hobby2", name: "Hobby2", field: "hobby2" },
     { id: "address", name: "Address", field: "address" },
     { id: "phone", name: "Phone", field: "phone" },
-    { id: "check", name: "Check", field: "check" },
-    { id: "reg_id", name: "Reg_id", field: "reg_id" },
-    { id: "upd_id", name: "Upd_id", field: "upd_id" }
+    {
+      id: "check",
+      name: "Check",
+      field: "check",
+      cssClass: "cell-effort-driven",
+      formatter: Slick.Formatters.Checkmark
+    },
+    { id: "reg_date", name: "등록일", field: "reg_date" },
+    { id: "upd_date", name: "수정일", field: "upd_date" }
   ];
 
   var options = {
@@ -51,8 +72,6 @@
   };
 
   $(function() {
-    var griddata = [];
-
     //Ajax GET Method로 db temp_table에서 data read
     $.ajax({
       url: "/modules/t1sub1sub2/get", // modules/t1sub1sub2/get으로 라우팅
@@ -66,7 +85,7 @@
           //console.log(result.length);
           //console.log(result[0].name);
           for (var i = 0; i < result.length; i++) {
-            griddata[i] = {
+            data[i] = {
               id: result[i].id,
               name: result[i].name,
               location: result[i].location,
@@ -75,9 +94,9 @@
               hobby2: result[i].hobby2,
               address: result[i].address,
               phone: result[i].phone,
-              check: result[i].check,
-              reg_id: result[i].reg_id,
-              upd_id: result[i].upd_id
+              check: result[i].check == 1, //true,false 값으로 받음
+              reg_date: result[i].reg_date,
+              upd_date: result[i].upd_date
               //column의 field명에 매칭시킨다.
             };
           }
@@ -86,6 +105,6 @@
       }
     });
 
-    grid = new Slick.Grid("#myGrid", griddata, columns, options);
+    grid = new Slick.Grid("#myGrid", data, columns, options);
   });
 </script>
