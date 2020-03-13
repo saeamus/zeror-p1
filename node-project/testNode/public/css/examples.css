@@ -1,4 +1,4 @@
-@import url('../slick-default-theme.css');
+@import url("slick-default-theme.css");
 
 * {
   font-family: arial;
@@ -30,7 +30,8 @@ ul {
   margin: 0;
 }
 
-#myGrid, .example-grid {
+#myGrid,
+.example-grid {
   background: white;
   outline: 0;
   border: 1px solid gray;
@@ -40,7 +41,7 @@ ul {
   border: 1px solid gray;
   border-bottom: 0;
   border-top: 0;
-  background: url('../images/header-bg.gif') repeat-x center top;
+  background: url("../images/header-bg.gif") repeat-x center top;
   color: black;
   height: 24px;
   line-height: 24px;
@@ -80,7 +81,7 @@ ul {
   width: 320px;
   position: absolute;
   top: 0px;
-  left: 650px;
+  left: 900px;
 }
 
 /* Individual cell styles */
@@ -107,7 +108,7 @@ ul {
 }
 
 .slick-row.selected .cell-move-handle {
-  background: #D5DC8D;
+  background: #d5dc8d;
 }
 
 .slick-row .cell-actions {
@@ -115,7 +116,7 @@ ul {
 }
 
 .slick-row.complete {
-  background-color: #DFD;
+  background-color: #dfd;
   color: #555;
 }
 
@@ -135,11 +136,10 @@ input.editor-text {
   background: transparent;
   outline: 0;
   padding: 0;
-
 }
 
 .ui-datepicker-trigger {
-  background:url("../images/calendar.gif") top left no-repeat;
+  background: url("../images/calendar.gif") top left no-repeat;
   width: 16px;
   height: 16px;
 
@@ -230,5 +230,3 @@ input.editor-checkbox {
   padding: 0;
   border: 0;
 }
-
-
