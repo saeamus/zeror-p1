@@ -56,36 +56,16 @@
 <script src="/controls/slick.dataview.js"></script>
 <script src="/controls/slick.pager.js"></script>
 <script src="/controls/slick.columnpicker.js"></script>
-
+<script src="/javascripts/getTimeStamp.js"></script>
 <script>
-  //Datetime 형식 변환 함수 yyyy-mm-dd hh:mm:ss로 변환
-  function getTimeStamp() {
-    var d = new Date();
-
-    var s =
-      leadingZeros(d.getFullYear(), 4) +
-      "-" +
-      leadingZeros(d.getMonth() + 1, 2) +
-      "-" +
-      leadingZeros(d.getDate(), 2) +
-      " " +
-      leadingZeros(d.getHours(), 2) +
-      ":" +
-      leadingZeros(d.getMinutes(), 2) +
-      ":" +
-      leadingZeros(d.getSeconds(), 2);
-
-    return s;
-  }
-
-  function leadingZeros(n, digits) {
-    var zero = "";
-    n = n.toString();
-
-    if (n.length < digits) {
-      for (i = 0; i < digits - n.length; i++) zero += "0";
+  function cloneMessage(gridObj) {
+    var clone = {};
+    for (var key in gridObj) {
+      if (gridObj.hasOwnProperty(key))
+        //ensure not adding inherited props
+        clone[key] = gridObj[key];
     }
-    return zero + n;
+    return clone;
   }
 
   function requiredFieldValidator(value) {
@@ -122,19 +102,26 @@
   }
 
   function saveData() {
-    alert("db에서 삭제하는 것은 코드 작성중");
-  }
-
-  function cancelData() {
-    for (var i = 0; i < selectedData.length; ++i) {
-      if (selectedData[i].action == "d") {
-        var item = selectedData[i];
-        dataView.addItem(item);
-      }
-    }
+    postGrid(JSON.stringify(selectedData));
     selectedData = []; //buffer clear
   }
 
+  function cancelData() {
+    getGrid();
+    for (var i = 0; i < selectedData.length; i++) {
+      if (selectedData[i].action == "c") {
+        var item = selectedData[i];
+        console.log(item);
+        dataView.deleteItem(item.id);
+      }
+    }
+    grid.invalidateAllRows();
+    grid.render();
+    selectedData = []; //buffer clear
+  }
+
+  var selectedRow;
+  var selectedRowData = [];
   var dataView;
   var grid;
   var data = [];
@@ -170,13 +157,13 @@
     { id: "reg_date", name: "등록일", field: "reg_date", minWidth: 60, editor: Slick.Editors.Date },
     { id: "upd_date", name: "수정일", field: "upd_date", minWidth: 60, editor: Slick.Editors.Date },
     {
-      id: "check",
+      id: "check_bit",
       name: "Check",
       width: 80,
       minWidth: 20,
       maxWidth: 80,
       cssClass: "cell-effort-driven",
-      field: "check",
+      field: "check_bit",
       formatter: Slick.Formatters.Checkmark,
       editor: Slick.Editors.Checkbox
     }
@@ -201,11 +188,33 @@
   dataView = new Slick.Data.DataView({ inlineFilters: true });
   var dateTime = getTimeStamp();
 
-  $(function() {
+  function postGrid(postData) {
+    $.ajax({
+      url: "/modules/t1sub1sub3/post", // modules/t1sub1sub3/post으로 라우팅
+      async: false, //success시 grid를 그리므로 async로 처리하여도 된다
+      dataType: "json",
+      type: "POST",
+      data: { data: postData },
+      success: function(result) {
+        if (result) {
+          console.log("db 기록 성공");
+          getGrid();
+
+          dataView.beginUpdate();
+          grid.invalidateAllRows();
+          dataView.setItems(data); //dataView가 먼저 생성되야한다.
+          dataView.endUpdate();
+          grid.render();
+        }
+      }
+    });
+  }
+
+  function getGrid() {
     //Ajax GET Method로 db temp_table에서 data read
     $.ajax({
       url: "/modules/t1sub1sub3/get", // modules/t1sub1sub3/get으로 라우팅
-      async: false, // async:true이면 javascript 특성상 db에서 data를 가져오기 전에 grid를 그려버린다.그러면 data로딩 안됨.
+      async: true, //success시 grid를 그리므로 async로 처리하여도 된다
       dataType: "json",
       type: "GET",
       //data: { data: get },
@@ -224,17 +233,25 @@
               hobby2: result[i].hobby2,
               address: result[i].address,
               phone: result[i].phone,
-              check: result[i].check == 1, //true,false 값
+              check_bit: result[i].check_bit == 1, //true,false 값
               reg_date: result[i].reg_date,
               upd_date: result[i].upd_date
               //column의 field명에 매칭시킨다.
             };
           }
           //console.log(griddata[2].name);
+          dataView.beginUpdate();
+          grid.invalidateAllRows();
           dataView.setItems(data); //dataView가 먼저 생성되야한다.
+          dataView.endUpdate();
+          grid.render();
         }
       }
     });
+  }
+
+  $(function() {
+    getGrid();
 
     grid = new Slick.Grid("#myGrid", dataView, columns, options);
 
@@ -244,11 +261,19 @@
     var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
     grid.onCellChange.subscribe(function(e, args) {
+      var obj = {};
+      obj = args.item;
+      obj["action"] = "u";
+      //console.log(obj);
+      selectedData.push(cloneMessage(obj)); //array of object를 생성
+      console.log("oncellchanged");
+      console.log(selectedData);
       dataView.updateItem(args.item.id, args.item);
     });
 
     //new row입력시 특정cell에 default 데이타 자동생성
     grid.onAddNewRow.subscribe(function(e, args) {
+      var obj = {};
       var item = {
         id: data.length + 1,
         reg_date: dateTime,
@@ -256,7 +281,12 @@
         check: false
       };
       $.extend(item, args.item);
-      dataView.addItem(item);
+      dataView.addItem(item); //new data등록
+      obj = dataView.getItemById(item.id); //create경우에는 dataview에 item이 등록 된 후에 버퍼링
+      obj["action"] = "c";
+      selectedData.push(cloneMessage(obj)); //array of object를 생성
+      // console.log("onaddnewrow");
+      // console.log(selectedData);
     });
 
     //여러 row 선택시 control or shift키 사용

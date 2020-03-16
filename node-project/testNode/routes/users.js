@@ -10,37 +10,8 @@ const router = express.Router();
 //const models = require("../models");  //sequelize사용시에만  model 정의
 const crypto = require("crypto");
 var mysqlDB = require("../conf/saeamus-db");
-
-//Datetime 형식 변환 함수 yyyy-mm-dd hh:mm:ss로 변환
-function getTimeStamp() {
-  var d = new Date();
-
-  var s =
-    leadingZeros(d.getFullYear(), 4) +
-    "-" +
-    leadingZeros(d.getMonth() + 1, 2) +
-    "-" +
-    leadingZeros(d.getDate(), 2) +
-    " " +
-    leadingZeros(d.getHours(), 2) +
-    ":" +
-    leadingZeros(d.getMinutes(), 2) +
-    ":" +
-    leadingZeros(d.getSeconds(), 2);
-
-  return s;
-}
-
-function leadingZeros(n, digits) {
-  var zero = "";
-  n = n.toString();
-
-  if (n.length < digits) {
-    for (i = 0; i < digits - n.length; i++) zero += "0";
-  }
-  return zero + n;
-}
-
+var cudate = require("../public/javascripts/getTimeStamp"); //javascript에서는 yyyy-mm-dd hh:mm:ss 형식 변환함수가 없다. 함수를 만들어 써야한다.
+var dt = cudate();
 //회원가입 화면으로 라우팅
 router.get("/sign_up", function(req, res, next) {
   res.render("signup");
@@ -66,21 +37,16 @@ router.post("/sign_up", async function(req, res, next) {
     .update(inputPassword + salt) // 해시코드에 salt를 더해서 보안성을 높임
     .digest("hex"); //인코딩 방식 정의
 
-  var dt = getTimeStamp(); //javascript에서는 yyyy-mm-dd hh:mm:ss 형식 변환함수가 없다. 함수를 만들어 써야한다.
-
   //query문: user 정보를 db에 저장 , userId는 유니크특성을 가짐(동일 아이디로 중복 가입 안됨)
   var sql = "INSERT INTO user_info(userId,email,password,salt,createDate,updateDate)  VALUES(?,?,?,?,?,?)";
-  mysqlDB.query(
-    sql,
-    [body.username, body.email, hashPassword, salt, dt, dt], // 위의 query문에서 values(?,?,?,?,?,?) 를 정의하는 파라메터
-    function(err, result) {
-      if (err) res.send("error : " + err);
-      else {
-        console.log("1 record inserted");
-        res.redirect("/");
-      }
+  var params = [body.username, body.email, hashPassword, salt, dt, dt]; // 위의 query문에서 values(?,?,?,?,?,?) 를 정의하는 파라메터
+  mysqlDB.query(sql, params, function(err, result) {
+    if (err) res.send("error : " + err);
+    else {
+      console.log("1 record inserted");
+      res.redirect("/");
     }
-  );
+  });
 
   //res.redirect("/users/sign_up"); //이곳에 있으면 회원가입실행시 [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client 에러발생
 });

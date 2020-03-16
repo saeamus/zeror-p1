@@ -11,6 +11,7 @@ const router = express.Router();
 const fs = require("fs");
 const ejs = require("ejs");
 var mysqlDB = require("../conf/saeamus-db");
+//var sqlQuery = require("../routes/dbQuery.js");
 
 var t1sub1sub1 = fs.readFileSync("./views/m-t1sub1sub1.ejs", "utf8");
 var t1sub1sub2 = fs.readFileSync("./views/m-t1sub1sub2.ejs", "utf8");
@@ -35,6 +36,8 @@ var t3sub6 = fs.readFileSync("./views/m-t3sub6.ejs", "utf8");
 
 var t4 = fs.readFileSync("./views/m-t4.ejs", "utf8");
 
+var cudate = require("../public/javascripts/getTimeStamp");
+var currdate = cudate();
 // //원래 메뉴화면 라우팅
 // //menu 화면으로 라우팅
 // router.get("/t1sub1sub1", function(req, res, next) {
@@ -75,6 +78,7 @@ router.get("/t1sub1sub2", function(req, res) {
 //AJAX GET METHOD로 db에서 data가져옴
 router.get("/t1sub1sub2/get", function(req, res) {
   var sql = "select * from temp_table";
+
   mysqlDB.query(sql, function(err, results) {
     if (err) {
       res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
@@ -96,8 +100,10 @@ router.get("/t1sub1sub3", function(req, res, next) {
 
 //AJAX GET METHOD로 db에서 data가져옴
 router.get("/t1sub1sub3/get", function(req, res) {
-  var sql = "select * from temp_table";
-  mysqlDB.query(sql, function(err, results) {
+  console.log(currdate);
+  var sql = "select * from temp_table where del_chk != ?";
+  var params = ["1"];
+  mysqlDB.query(sql, params, function(err, results) {
     if (err) {
       res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
     }
@@ -110,6 +116,78 @@ router.get("/t1sub1sub3/get", function(req, res) {
   });
 });
 
+//AJAX GET METHOD로 db에서 data가져옴
+router.post("/t1sub1sub3/post", function(req, res) {
+  var postData = JSON.parse(req.body.data);
+  //console.log(postData);
+  for (i = 0; i < postData.length; i++) {
+    if (postData[i].action == "c") {
+      //console.log(postData[i]);
+
+      var sql =
+        "INSERT INTO temp_table(id,name,location,occupation,hobby1,hobby2,address,phone,check_bit,del_chk,reg_date,upd_date,reg_id,upd_id)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      var params = [
+        postData[i].id,
+        postData[i].name,
+        postData[i].location,
+        postData[i].occupation,
+        postData[i].hobby1,
+        postData[i].hobby2,
+        postData[i].address,
+        postData[i].phone,
+        "0",
+        //postData[i].check_bit,
+        "0",
+        currdate,
+        currdate,
+        username,
+        username
+      ];
+
+      mysqlDB.query(sql, params, function(err, results) {
+        if (err) {
+          res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
+        }
+      });
+    }
+    if (postData[i].action == "u") {
+      console.log(postData[i]);
+      var sql =
+        // "UPDATE temp_table set name=?,location=?,occupation=?,hobby1=?,hobby2=?,check_bit=?,upd_date=?,upd_id=? WHERE id =?";
+        "UPDATE temp_table set name=?,location=?,occupation=?,hobby1=?,hobby2=?,address=?,phone=?,check_bit=?,upd_id=? WHERE id =?";
+      var params = [
+        postData[i].name,
+        postData[i].location,
+        postData[i].occupation,
+        postData[i].hobby1,
+        postData[i].hobby2,
+        postData[i].address,
+        postData[i].phone,
+        "0",
+        //postData[i].check_bit,
+        //currDate,
+        username,
+        postData[i].id
+      ];
+      mysqlDB.query(sql, params, function(err, results) {
+        if (err) {
+          res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
+        }
+      });
+    }
+    if (postData[i].action == "d") {
+      console.log(postData[i]);
+      var sql = "UPDATE temp_table set del_chk=1 where id=?";
+      var params = [postData[i].id];
+      mysqlDB.query(sql, params, function(err, results) {
+        if (err) {
+          res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
+        }
+      });
+    }
+  }
+  res.send("sucess");
+});
 //menu 화면으로 라우팅
 router.get("/t1sub1sub4", function(req, res, next) {
   var t1sub1sub4_ren = ejs.render(t1sub1sub4, { title: "T1 SUB1 SUB4" });

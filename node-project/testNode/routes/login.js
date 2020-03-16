@@ -15,6 +15,7 @@ var mysqlDB = require("../conf/saeamus-db"); //이것을 지우면 mysqlDB가 �
 
 var home = fs.readFileSync("./views/home.ejs", "utf8"); //layout.ejs의 <main>content영역애  삽입할 home.ejs를 불러온다
 
+var username;
 //라우터의 get()함수를 이용해 request URL('/')에 대한 업무처리 로직 정의
 //즉,호스트주소:8000으로 접속시 index route login화면
 router.get("/", function(req, res, next) {
@@ -34,7 +35,7 @@ router.get("/home", function(req, res, next) {
 //////////////////////////////////////////////////////////////////////////////////////////
 router.post("/", async function(req, res, next) {
   let body = req.body;
-  let username = body.userId;
+  username = body.userId;
   global.username = username; //global 변수 선언
   var sql = "select * from user_info where userId=?"; //query문 ?표는 아래 query문에서 두번째 파라메타( [body.userId])로 전달
 
