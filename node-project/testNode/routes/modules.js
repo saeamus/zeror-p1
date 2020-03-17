@@ -107,7 +107,7 @@ router.get("/t1sub1sub3/get", function(req, res) {
     if (!results[0]) {
       res.send("nodata"); //query 결과가 undefined 즉, db에 userId가 없는 경우, 화면에  메세지 출력 (~/views/nodata.ejs)
     }
-    //console.log(results);
+    console.log(results);
     res.send(results); //제목없이 리턴함,만일 res.send({ttt:results}); 이리하면 ttt란 이름으로 결과값이 리턴됨.
     //이경우 받는 script에서 result.ttt[0].id 이런식으로 받아야함
   });
