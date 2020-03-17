@@ -56,7 +56,14 @@
 <script src="/controls/slick.dataview.js"></script>
 <script src="/controls/slick.pager.js"></script>
 <script src="/controls/slick.columnpicker.js"></script>
-<script src="/javascripts/getTimeStamp.js"></script>
+<!-- <script src="/javascripts/getTimeStamp.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+  var date = new Date();
+  var dateTime = moment(date).format("YYYY-MM-DD HH:mm:ss");
+  // $('.dateview2').html(moment('2019-08-10').format('YYYY MM DD HH:mm:ss'));
+</script>
+
 <script>
   function cloneMessage(gridObj) {
     var clone = {};
@@ -120,11 +127,12 @@
     selectedData = []; //buffer clear
   }
 
+  var maxPeak;
   var selectedRow;
   var selectedRowData = [];
   var dataView;
   var grid;
-  var data = [];
+  var griddata = [];
   var columns = [
     {
       id: "id",
@@ -142,7 +150,7 @@
     { id: "location", name: "Location", field: "location", editor: Slick.Editors.Text },
     { id: "occupation", name: "Occupation", field: "occupation", editor: Slick.Editors.Text },
     { id: "hobby1", name: "Hobby1", field: "hobby1", editor: Slick.Editors.Text },
-    { id: "hobby2", name: "Hobby2", field: "hobby2", editor: Slick.Editors.Text },
+    { id: "birth", name: "Birthday", field: "birth", editor: Slick.Editors.Date },
     { id: "address", name: "Address", field: "address", width: 100, editor: Slick.Editors.LongText }, //multi line textbox
     { id: "phone", name: "Phone", field: "phone", editor: Slick.Editors.Text },
     // {
@@ -154,8 +162,8 @@
     //   formatter: Slick.Formatters.PercentCompleteBar,
     //   editor: Slick.Editors.PercentComplete
     // },
-    { id: "reg_date", name: "등록일", field: "reg_date", minWidth: 60, editor: Slick.Editors.Date },
-    { id: "upd_date", name: "수정일", field: "upd_date", minWidth: 60, editor: Slick.Editors.Date },
+    { id: "reg_date", name: "등록일", field: "reg_date", minWidth: 60 },
+    { id: "upd_date", name: "수정일", field: "upd_date", minWidth: 60 },
     {
       id: "check_bit",
       name: "Check",
@@ -186,7 +194,6 @@
   };
 
   dataView = new Slick.Data.DataView({ inlineFilters: true });
-  var dateTime = getTimeStamp();
 
   function postGrid(postData) {
     $.ajax({
@@ -197,14 +204,8 @@
       data: { data: postData },
       success: function(result) {
         if (result) {
-          console.log("db 기록 성공");
+          console.log(result.resultData + " db 기록 성공");
           getGrid();
-
-          dataView.beginUpdate();
-          grid.invalidateAllRows();
-          dataView.setItems(data); //dataView가 먼저 생성되야한다.
-          dataView.endUpdate();
-          grid.render();
         }
       }
     });
@@ -224,25 +225,25 @@
           //console.log(result.length);
           //console.log(result[0].name);
           for (var i = 0; i < result.length; i++) {
-            data[i] = {
+            griddata[i] = {
               id: result[i].id,
               name: result[i].name,
               location: result[i].location,
               occupation: result[i].occupation,
               hobby1: result[i].hobby1,
-              hobby2: result[i].hobby2,
+              birth: result[i].birth,
               address: result[i].address,
               phone: result[i].phone,
-              check_bit: result[i].check_bit == 1, //true,false 값
+              check_bit: result[i].check_bit, //true,false 값
               reg_date: result[i].reg_date,
               upd_date: result[i].upd_date
               //column의 field명에 매칭시킨다.
             };
           }
-          //console.log(griddata[2].name);
+          maxPeak = result[0].cnt; //레코드 카운트 값을 maxPeak에 대입
           dataView.beginUpdate();
           grid.invalidateAllRows();
-          dataView.setItems(data); //dataView가 먼저 생성되야한다.
+          dataView.setItems(griddata); //dataView가 먼저 생성되야한다.
           dataView.endUpdate();
           grid.render();
         }
@@ -265,7 +266,7 @@
       obj = args.item;
       obj["action"] = "u";
       //console.log(obj);
-      selectedData.push(cloneMessage(obj)); //array of object를 생성
+      selectedData.push(cloneMessage(obj)); //array of object를 생성,object를 clone해야 다른 object로 추가된다
       console.log("oncellchanged");
       console.log(selectedData);
       dataView.updateItem(args.item.id, args.item);
@@ -273,18 +274,19 @@
 
     //new row입력시 특정cell에 default 데이타 자동생성
     grid.onAddNewRow.subscribe(function(e, args) {
+      //console.log(maxPeak);
       var obj = {};
       var item = {
-        id: data.length + 1,
-        reg_date: dateTime,
-        upd_date: dateTime,
+        id: maxPeak + 1,
+        //reg_date: dateTime, //작성시 datetime 대신 , db에 insert할때 자동으로 timestamp기록
+        //upd_date: dateTime, //작성시 datetime 대신 , db에 update할때 자동으로 timestamp기록
         check: false
       };
       $.extend(item, args.item);
       dataView.addItem(item); //new data등록
       obj = dataView.getItemById(item.id); //create경우에는 dataview에 item이 등록 된 후에 버퍼링
       obj["action"] = "c";
-      selectedData.push(cloneMessage(obj)); //array of object를 생성
+      selectedData.push(cloneMessage(obj)); //array of object를 생성,object를 clone해야 다른 object로 추가된다
       // console.log("onaddnewrow");
       // console.log(selectedData);
     });

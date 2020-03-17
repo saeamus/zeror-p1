@@ -11,7 +11,6 @@ const router = express.Router();
 const fs = require("fs");
 const ejs = require("ejs");
 var mysqlDB = require("../conf/saeamus-db");
-//var sqlQuery = require("../routes/dbQuery.js");
 
 var t1sub1sub1 = fs.readFileSync("./views/m-t1sub1sub1.ejs", "utf8");
 var t1sub1sub2 = fs.readFileSync("./views/m-t1sub1sub2.ejs", "utf8");
@@ -36,8 +35,6 @@ var t3sub6 = fs.readFileSync("./views/m-t3sub6.ejs", "utf8");
 
 var t4 = fs.readFileSync("./views/m-t4.ejs", "utf8");
 
-var cudate = require("../public/javascripts/getTimeStamp");
-var currdate = cudate();
 // //원래 메뉴화면 라우팅
 // //menu 화면으로 라우팅
 // router.get("/t1sub1sub1", function(req, res, next) {
@@ -100,9 +97,9 @@ router.get("/t1sub1sub3", function(req, res, next) {
 
 //AJAX GET METHOD로 db에서 data가져옴
 router.get("/t1sub1sub3/get", function(req, res) {
-  console.log(currdate);
-  var sql = "select * from temp_table where del_chk != ?";
-  var params = ["1"];
+  //del_chk != 1인 전체 data와 전체레코드 갯수(삭제된 data가 있으므로) 를 퀴리
+  var sql = "select * ,(select count(*) from temp_table) as cnt from temp_table where del_chk != ?";
+  var params = [1];
   mysqlDB.query(sql, params, function(err, results) {
     if (err) {
       res.send("error : " + err); //err 발생시 화면에 에러메세지 출력
@@ -116,7 +113,7 @@ router.get("/t1sub1sub3/get", function(req, res) {
   });
 });
 
-//AJAX GET METHOD로 db에서 data가져옴
+//AJAX POST METHOD로 db에 data insert및 update
 router.post("/t1sub1sub3/post", function(req, res) {
   var postData = JSON.parse(req.body.data);
   //console.log(postData);
@@ -125,21 +122,17 @@ router.post("/t1sub1sub3/post", function(req, res) {
       //console.log(postData[i]);
 
       var sql =
-        "INSERT INTO temp_table(id,name,location,occupation,hobby1,hobby2,address,phone,check_bit,del_chk,reg_date,upd_date,reg_id,upd_id)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        "INSERT INTO temp_table(name,location,occupation,hobby1,birth,address,phone,check_bit,del_chk,reg_id,upd_id)  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
       var params = [
-        postData[i].id,
         postData[i].name,
         postData[i].location,
         postData[i].occupation,
         postData[i].hobby1,
-        postData[i].hobby2,
+        postData[i].birth,
         postData[i].address,
         postData[i].phone,
+        postData[i].check_bit,
         "0",
-        //postData[i].check_bit,
-        "0",
-        currdate,
-        currdate,
         username,
         username
       ];
@@ -154,18 +147,16 @@ router.post("/t1sub1sub3/post", function(req, res) {
       console.log(postData[i]);
       var sql =
         // "UPDATE temp_table set name=?,location=?,occupation=?,hobby1=?,hobby2=?,check_bit=?,upd_date=?,upd_id=? WHERE id =?";
-        "UPDATE temp_table set name=?,location=?,occupation=?,hobby1=?,hobby2=?,address=?,phone=?,check_bit=?,upd_id=? WHERE id =?";
+        "UPDATE temp_table set name=?,location=?,occupation=?,hobby1=?,birth=?,address=?,phone=?,check_bit=?,upd_id=? WHERE id =?";
       var params = [
         postData[i].name,
         postData[i].location,
         postData[i].occupation,
         postData[i].hobby1,
-        postData[i].hobby2,
+        postData[i].birth,
         postData[i].address,
         postData[i].phone,
-        "0",
-        //postData[i].check_bit,
-        //currDate,
+        postData[i].check_bit,
         username,
         postData[i].id
       ];
@@ -186,7 +177,7 @@ router.post("/t1sub1sub3/post", function(req, res) {
       });
     }
   }
-  res.send("sucess");
+  res.send({ resultData: "sucess!!!" }); //result에 메세지 전송
 });
 //menu 화면으로 라우팅
 router.get("/t1sub1sub4", function(req, res, next) {
