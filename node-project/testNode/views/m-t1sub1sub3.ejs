@@ -506,7 +506,7 @@
               location: result[i].location,
               occupation: result[i].occupation,
               hobby1: result[i].hobby1,
-              birth: moment(result[i].birth).format("YYYY-MM-DD"),
+              birth: result[i].birth,
               address: result[i].address,
               phone: result[i].phone,
               check_bit: result[i].check_bit, //true,false 값
@@ -516,8 +516,6 @@
             };
           }
           maxPeak = result[0].cnt; //레코드 카운트 값을 maxPeak에 대입
-          var test = moment(result[0].birth).format("YYYY-MM-DD");
-          console.log(test);
           dataView.beginUpdate();
           grid.invalidateAllRows();
           dataView.setItems(griddata); //dataView가 먼저 생성되야한다.
