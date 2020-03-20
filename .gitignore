@@ -1,2 +1,7 @@
 saeamus-db.js
 saeamus-db_org.js
+node-project/testNode/node_modules/puppeteer/
+node-project/testNode/node_modules/jsreport-browser-client-dist/
+node-project/testNode/node_modules/jsreport-chrome-pdf/
+node-project/testNode/node_modules/jsreport-core/
+node-project/testNode/node_modules/jsreport-ejs/
