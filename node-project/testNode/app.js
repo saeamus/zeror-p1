@@ -22,6 +22,7 @@ var app = express();
 var indexRouter = require("./routes/login"); // indexRouter는 ~/routes/login.js 파일을 사용하겠다는 의미. 확장자 ".js"생략함
 var usersRouter = require("./routes/users");
 var modulesRouter = require("./routes/modules");
+var reportRouter = require("./routes/reports");
 
 //mysql db connection
 var mysqlDB = require("./conf/saeamus-db"); //db연결설정 모듈을 선언 ~/conf/saeamus-db.js 파일을 사용하겠다는 의미
@@ -57,6 +58,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/modules", modulesRouter);
+app.use("/reports", reportRouter); //reports router 추가
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

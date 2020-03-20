@@ -6,5 +6,61 @@
      <main>태그 부분만 작성하면 된다-->
 
 <h1 style="text-align: center"><%= title %> 메뉴 화면 입니다</h1>
-<h1 style="text-align: center">코드 작성중 입니다.</h1>
+<h1 style="text-align: center">버튼 클릭시 서버의 함수를 콜하는 간단 예제입니다.</h1>
 <img src="/images/maintenance-2422173_400.jpg" alt="My Image" style="margin-left: auto; margin-right: auto; display: block;" />
+<div>
+  <button id="btnReport" onclick="makeDoc('버튼')">버튼을 눌러보세요</button>
+  <button id="btnReport" onclick="makePdf('report2')">Report 2 발행</button>
+  <div id="test"></div>
+</div>
+
+<script>
+  function makeDoc(data1) {
+    $.ajax({
+      url: "/reports/report1", // modules/t1sub1sub3/post으로 라우팅
+      async: false, //success시 grid를 그리므로 async로 처리하여도 된다
+      dataType: "json",
+      type: "POST",
+      data: { data: data1 },
+      success: function(result) {
+        if (result) {
+          console.log("Success:");
+          console.log(result);
+          var resData = result.res;
+          console.log(resData);
+          $("#test").text(resData);
+        }
+      }
+    });
+  }
+  function makePdf(data2) {
+    $.ajax({
+      url: "/reports/report2", // modules/t1sub1sub3/post으로 라우팅
+      async: false, //success시 grid를 그리므로 async로 처리하여도 된다
+      dataType: "json",
+      type: "POST",
+      data: { data: data2 },
+      success: function(result) {
+        if (result) {
+          console.log("Success:");
+          console.log(result);
+          var resData = result.res;
+          console.log(resData + "이 정상 발행되었습니다");
+          $("#test").text(resData + "이 정상 발행되었습니다");
+
+          var html =
+            "<html>" +
+            "<style>html,body {padding:0;margin:0;} iframe {width:100%;height:100%;border:0}</style>" +
+            "<body>" +
+            '<iframe type="application/pdf" src="/reports/' +
+            resData +
+            '.pdf"></iframe>' +
+            "</body></html>";
+          var a = window.open("about:blank", "Report");
+          a.document.write(html);
+          a.document.close();
+        }
+      }
+    });
+  }
+</script>
