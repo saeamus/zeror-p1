@@ -3,7 +3,7 @@
 const express = require("express");
 const report = express();
 const fs = require("fs");
-const jsreport = require("jsreport-core")();
+const carbone = require("carbone");
 
 report.post("/report1", function(req, res) {
   var data = req.body.data;
@@ -13,28 +13,144 @@ report.post("/report1", function(req, res) {
 
 report.post("/report2", function(req, res) {
   var repoTitle = req.body.data;
-  var request = {
-    template: {
-      content: "<h1>이 문서 제목은  <%= foo %> 입니다</h1>",
-      engine: "ejs",
-      recipe: "chrome-pdf"
-    },
-    data: {
-      foo: repoTitle
-    }
-  };
-  jsreport
-    .init()
-    .then(() => {
-      jsreport.render(request).then(resp => {
-        // write report buffer to a file
-        fs.writeFileSync(`public/reports/${repoTitle}.pdf`, resp.content);
-        res.send({ res: repoTitle });
-      });
-    })
-    .catch(e => {
-      console.log(e);
+  if (repoTitle == "simple") {
+    var data = { firstname: "상훈", lastname: "변" };
+    var options = {
+      convertTo: "pdf" //can be docx, txt, ...
+    };
+
+    carbone.render("./public/reportForm/simple.odt", data, options, function(err, result) {
+      if (err) return console.log(err);
+      fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+      res.send({ res: repoTitle });
     });
+  }
+  if (repoTitle == "movie") {
+    var data = [
+      {
+        movieName: "Matrix",
+        actors: [
+          {
+            firstname: "Keanu",
+            lastname: "Reeves"
+          },
+          {
+            firstname: "Laurence",
+            lastname: "Fishburne"
+          },
+          {
+            firstname: "Carrie-Anne",
+            lastname: "Moss"
+          }
+        ]
+      },
+      {
+        movieName: "Back To The Future",
+        actors: [
+          {
+            firstname: "Michael",
+            lastname: "J. Fox"
+          },
+          {
+            firstname: "Christopher",
+            lastname: "Lloyd"
+          }
+        ]
+      },
+      {
+        movieName: "심청전",
+        actors: [
+          {
+            firstname: "Michael",
+            lastname: "J. Fox"
+          },
+          {
+            firstname: "Christopher",
+            lastname: "Lloyd"
+          }
+        ]
+      },
+      {
+        movieName: "아무거나",
+        actors: [
+          {
+            firstname: "Michael",
+            lastname: "J. Fox"
+          },
+          {
+            firstname: "Christopher",
+            lastname: "Lloyd"
+          }
+        ]
+      },
+      {
+        movieName: "홍길동전",
+        actors: [
+          {
+            firstname: "Michael",
+            lastname: "J. Fox"
+          },
+          {
+            firstname: "Christopher",
+            lastname: "Lloyd"
+          }
+        ]
+      }
+    ];
+
+    var options = {
+      convertTo: "pdf" //can be docx, txt, ...
+    };
+
+    carbone.render("./public/reportForm/movies.docx", data, options, function(err, result) {
+      if (err) return console.log(err);
+      fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+      res.send({ res: repoTitle });
+    });
+  }
+  if (repoTitle == "flatTable") {
+    var data = [
+      {
+        movieName: "Matrix",
+        actors: [
+          {
+            firstname: "Keanu",
+            lastname: "Reeves"
+          },
+          {
+            firstname: "Laurence",
+            lastname: "Fishburne"
+          },
+          {
+            firstname: "Carrie-Anne",
+            lastname: "Moss"
+          }
+        ]
+      },
+      {
+        movieName: "Back To The Future",
+        actors: [
+          {
+            firstname: "Michael",
+            lastname: "J. Fox"
+          },
+          {
+            firstname: "Christopher",
+            lastname: "Lloyd"
+          }
+        ]
+      }
+    ];
+    var options = {
+      convertTo: "pdf" //can be docx, txt, ...
+    };
+
+    carbone.render("./public/reportForm/flat_table.ods", data, options, function(err, result) {
+      if (err) return console.log(err);
+      fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+      res.send({ res: repoTitle });
+    });
+  }
 });
 
 module.exports = report;

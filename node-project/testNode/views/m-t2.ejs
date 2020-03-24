@@ -14,9 +14,20 @@
       style="margin-left: auto; margin-right: auto; display: block;"
     />
     <div>
-      <button id="btnReport1" onclick="makeDoc('버튼')">버튼을 눌러보세요</button>
-      <button id="btnReport2" onclick="makePdf('report2')">Report 2 발행</button>
-      <div id="test"></div>
+      <div>
+        <button id="btnReport1" onclick="makeDoc('버튼')">버튼을 눌러보세요</button>
+      </div>
+      <div>
+        <button id="btnReport2" onclick="makePdf('simple')">simple Report발행</button>
+      </div>
+      <div>
+        <button id="btnReport3" onclick="makePdf('movie')">movie Report발행</button>
+      </div>
+      <div>
+        <button id="btnReport4" onclick="makePdf('flatTable')">flatTable Report발행</button>
+      </div>
+
+      <div id="test" style="color:red"></div>
     </div>
   </div>
   <div id="right-main" style="width:50%; height:100%;float:right; box-sizing:border-box; background:rgb(0, 225, 255);">
@@ -56,26 +67,12 @@
           console.log("Success:");
           console.log(result);
           var resData = result.res;
-          console.log(resData + "이 정상 발행되었습니다");
-          $("#test").text(resData + "이 정상 발행되었습니다");
-
-          // var html =
-          //   "<html>" +
-          //   "<style>html,body {padding:0;margin:0;} iframe {width:100%;height:100%;border:0}</style>" +
-          //   "<body>" +
-          //   '<iframe type="application/pdf" src="/reports/' +
-          //   resData +
-          //   '.pdf"></iframe>' +
-          //   "</body></html>";
-          // var a = window.open("about:blank", "Report");
-          // a.document.write(html);
-          // a.document.close();
-          // $("#pdfDoc").html('<iframe style="width:100%;height:100%;border:0" type="application/pdf" src="/reports/' +
-          //    resData +
-          //    '.pdf"></iframe>');
-
+          console.log(resData + " Report가 정상 발행되었습니다");
+          $("#test").text(resData + " Report가 정상 발행되었습니다");
           $("#pdfDoc").html(
-            '<iframe style="width:100%;height:100%;border:0" type="application/pdf" src="/reports/' + resData + '.pdf"></iframe>'
+            '<iframe style="width:100%;height:100%;border:0" type="application/pdf" src="/reportOut/' +
+              resData +
+              '.pdf"></iframe>'
           );
         }
       }
