@@ -15,6 +15,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
 //var menuCrawling = require("./public/javascripts/crawling.js"); //20200310 delete menu crawling 모듈
 var app = express();
 
@@ -43,7 +44,7 @@ app.engine("html", require("ejs").renderFile); //ejs 엔진으로 html파일을 
 
 // express 서버 포트는 8000이다(cafe24 호스팅 서버는 8001 포트 사용)
 //AWS EC2서버는 반드시 보안설정에 가서 인바운드 포트(여기서는8000)를 접속가능한 상태로 설정해야한다.안그럼 연결 안됨
-app.set("port", process.env.PORT || 8000);
+//app.set("port", process.env.PORT || 8000);
 
 //미들웨어 등록
 //개발에 필요한 기본적인 미들웨어들은 express-generator가 자동으로 등록

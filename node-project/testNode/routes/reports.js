@@ -23,18 +23,6 @@ report.post("/report2", function(req, res) {
       foo: repoTitle
     }
   };
-  // jsreport
-  //   .init()
-  //   .then(() => {
-  //     jsreport.render(request).then(resp => {
-  //       // write report buffer to a file
-  //       fs.writeFileSync("test_report1.pdf", resp.content);
-  //       res.send({ res: repoTitle + "이 정상 발행되었습니다" });
-  //     });
-  //   })
-  //   .catch(e => {
-  //     console.log(e);
-  //   });
   jsreport
     .init()
     .then(() => {
