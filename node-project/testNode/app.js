@@ -16,7 +16,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-//var menuCrawling = require("./public/javascripts/crawling.js"); //20200310 delete menu crawling 모듈
 var app = express();
 
 //라우팅 모듈 선언

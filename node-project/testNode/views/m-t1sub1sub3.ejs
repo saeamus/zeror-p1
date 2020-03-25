@@ -13,8 +13,9 @@
     <button id="btnDelete" onclick="deleteRow()">ROW삭제</button>
     <button id="btnSave" onclick="saveData()">변경저장</button>
     <button id="btnCancel" onclick="cancelData()">변경취소</button>
+    <button id="btnReport" onclick="makeReport()" style="float:right">회원명부발행</button>
   </div>
-
+  <div id="pdfDoc" style="width:100%; height:auto;float:right; box-sizing:border-box; background:rgb(0, 225, 255);"></div>
   <div class="options-panel">
     <h2>Demonstrates:</h2>
     <ul>
@@ -487,6 +488,42 @@
     });
   }
 
+  function makeReport() {
+    var membersString = JSON.stringify(members);
+    $.ajax({
+      url: "/reports/report3", // modules/t1sub1sub3/post으로 라우팅
+      async: false, //success시 grid를 그리므로 async로 처리하여도 된다
+      dataType: "json",
+      type: "POST",
+      data: { memberList: membersString, title: "memberList" },
+      success: function(result) {
+        if (result) {
+          console.log("Success:");
+          console.log(result);
+          var resData = result.res;
+          console.log(resData + " Report가 정상 발행되었습니다");
+          $("#test").text(resData + " Report가 정상 발행되었습니다");
+          // $("#pdfDoc").html(
+          //   '<iframe style="width:100%;height:100%;border:0" type="application/pdf" src="/reportOut/' +
+          //     resData +
+          //     '.pdf"></iframe>'
+          // );
+
+          var html =
+            "<html>" +
+            "<style>html,body {padding:0;margin:0;} iframe {width:100%;height:100%;border:0}</style>" +
+            "<body>" +
+            '<iframe style="width:100%;height:100%;border:0" type="application/pdf" src="/reportOut/' +
+            resData +
+            '.pdf"></iframe>' +
+            "</body></html>";
+          var a = window.open("/", "", "_blank");
+          a.document.write(html);
+          a.document.close();
+        }
+      }
+    });
+  }
   function getGrid() {
     //Ajax GET Method로 db temp_table에서 data read
     $.ajax({
@@ -498,6 +535,8 @@
       success: function(result) {
         if (result) {
           //console.log(result);
+          members = result; //Grobal var:members
+          //console.log(members);
           //console.log(result.length);
           //console.log(result[0].name);
           for (var i = 0; i < result.length; i++) {

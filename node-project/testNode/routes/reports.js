@@ -4,6 +4,7 @@ const express = require("express");
 const report = express();
 const fs = require("fs");
 const carbone = require("carbone");
+report.use(express.json());
 
 report.post("/report1", function(req, res) {
   var data = req.body.data;
@@ -102,7 +103,7 @@ report.post("/report2", function(req, res) {
       convertTo: "pdf" //can be docx, txt, ...
     };
 
-    carbone.render("./public/reportForm/movies.docx", data, options, function(err, result) {
+    carbone.render("./public/reportForm/movies_temp.docx", data, options, function(err, result) {
       if (err) return console.log(err);
       fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
       res.send({ res: repoTitle });
@@ -151,6 +152,27 @@ report.post("/report2", function(req, res) {
       res.send({ res: repoTitle });
     });
   }
+});
+
+report.post("/report3", function(req, res) {
+  var repoTitle = req.body.title;
+  //req.body는 array를 못 받아서 일단 arry를 text로 변환해서 서버로 전송하고
+  //다시 JSON형식으로 변환한다
+  var memberlist = JSON.parse(req.body.memberList);
+
+  //console.log(repoTitle);
+  //console.log(req.body.memberList);
+
+  //console.log(memberlist);
+  var options = {
+    convertTo: "pdf" //can be docx, txt, ...
+  };
+
+  carbone.render("./public/reportForm/memberlist.docx", memberlist, options, function(err, result) {
+    if (err) return console.log(err);
+    fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+    res.send({ res: repoTitle });
+  });
 });
 
 module.exports = report;
