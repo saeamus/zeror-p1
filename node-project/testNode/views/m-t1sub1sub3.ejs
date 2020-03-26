@@ -13,7 +13,8 @@
     <button id="btnDelete" onclick="deleteRow()">ROW삭제</button>
     <button id="btnSave" onclick="saveData()">변경저장</button>
     <button id="btnCancel" onclick="cancelData()">변경취소</button>
-    <button id="btnReport" onclick="makeReport()" style="float:right">회원명부발행</button>
+    <button id="btnReport" onclick="makeReport('list')" style="float:right">회원명부발행</button>
+    <button id="btnReport" onclick="makeReport('person')" style="float:right">회원등록카드발행</button>
   </div>
   <div id="pdfDoc" style="width:100%; height:auto;float:right; box-sizing:border-box; background:rgb(0, 225, 255);"></div>
   <div class="options-panel">
@@ -488,14 +489,14 @@
     });
   }
 
-  function makeReport() {
+  function makeReport(param) {
     var membersString = JSON.stringify(members);
     $.ajax({
       url: "/reports/report3", // modules/t1sub1sub3/post으로 라우팅
       async: false, //success시 grid를 그리므로 async로 처리하여도 된다
       dataType: "json",
       type: "POST",
-      data: { memberList: membersString, title: "memberList" },
+      data: { memberList: membersString, title: param },
       success: function(result) {
         if (result) {
           console.log("Success:");

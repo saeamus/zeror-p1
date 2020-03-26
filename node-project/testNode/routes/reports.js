@@ -155,7 +155,6 @@ report.post("/report2", function(req, res) {
 });
 
 report.post("/report3", function(req, res) {
-  var repoTitle = req.body.title;
   //req.body는 array를 못 받아서 일단 arry를 text로 변환해서 서버로 전송하고
   //다시 JSON형식으로 변환한다
   var memberlist = JSON.parse(req.body.memberList);
@@ -167,12 +166,22 @@ report.post("/report3", function(req, res) {
   var options = {
     convertTo: "pdf" //can be docx, txt, ...
   };
-
-  carbone.render("./public/reportForm/memberlist.docx", memberlist, options, function(err, result) {
-    if (err) return console.log(err);
-    fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
-    res.send({ res: repoTitle });
-  });
+  if (req.body.title == "list") {
+    var repoTitle = "memberList";
+    carbone.render("./public/reportForm/memberlist.docx", memberlist, options, function(err, result) {
+      if (err) return console.log(err);
+      fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+      res.send({ res: repoTitle });
+    });
+  }
+  if (req.body.title == "person") {
+    var repoTitle = "member";
+    carbone.render("./public/reportForm/member.docx", memberlist, options, function(err, result) {
+      if (err) return console.log(err);
+      fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+      res.send({ res: repoTitle });
+    });
+  }
 });
 
 module.exports = report;

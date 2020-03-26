@@ -98,7 +98,8 @@ router.get("/t1sub1sub3", function(req, res, next) {
 //AJAX GET METHOD로 db에서 data가져옴
 router.get("/t1sub1sub3/get", function(req, res) {
   //del_chk != 1인 전체 data와 전체레코드 갯수(삭제된 data가 있으므로) 를 퀴리
-  var sql = "select * ,(select count(*) from temp_table) as cnt from temp_table where del_chk != ?";
+  var sql =
+    "select * ,(select count(*) from temp_table) as cnt,(select count(*) from temp_table  where del_chk != 1) as cntreal from temp_table where del_chk != ?";
   var params = [1];
   mysqlDB.query(sql, params, function(err, results) {
     if (err) {
