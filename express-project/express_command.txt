@@ -1,0 +1,19 @@
+view engine=pug 인 경우
+
+npm init				// package.json 파일을 작성합니다.    
+npm install express --save    
+npm install -g express-generator    
+express --view=pug myapp    
+cd myapp    
+npm install				//종속성을 설치    
+set DEBUG= myapp:* & npm start    
+
+view engine= ejs 인 경우
+
+npm init    
+npm install express --save    
+npm install -g express-generator    
+express --view=ejs myapp    
+cd myapp    
+npm install    
+set DEBUG= myapp:* & npm start        
