@@ -152,6 +152,83 @@ report.post("/report2", function(req, res) {
       res.send({ res: repoTitle });
     });
   }
+  if (repoTitle == "groupsum") {
+    var data = [
+      {
+        jan: 1,
+        feb: 2,
+        mar: 3,
+        apr: 4,
+        may: 5,
+        jun: 6,
+        jul: 7,
+        aug: 8,
+        sep: 9,
+        oct: 10,
+        nov: 11,
+        dec: 12,
+        rowsum: "=sum(left)",
+        colsum: "=sum(above)"
+      },
+      {
+        jan: 11,
+        feb: 12,
+        mar: 13,
+        apr: 14,
+        may: 15,
+        jun: 16,
+        jul: 17,
+        aug: 18,
+        sep: 19,
+        oct: 20,
+        nov: 21,
+        dec: 22,
+        rowsum: "=sum(left)",
+        colsum: "=sum(above)"
+      },
+      {
+        jan: 21,
+        feb: 22,
+        mar: 23,
+        apr: 24,
+        may: 25,
+        jun: 26,
+        jul: 27,
+        aug: 28,
+        sep: 29,
+        oct: 30,
+        nov: 31,
+        dec: 32,
+        rowsum: "=sum(left)",
+        colsum: "=sum(above)"
+      },
+      {
+        jan: 3,
+        feb: 12,
+        mar: 4,
+        apr: 16,
+        may: 2,
+        jun: 8,
+        jul: 1,
+        aug: 8,
+        sep: 7,
+        oct: 10,
+        nov: 9,
+        dec: 2,
+        rowsum: "=sum(left)",
+        colsum: "=sum(above)"
+      }
+    ];
+    var options = {
+      convertTo: "pdf" //can be docx, txt, ...
+    };
+
+    carbone.render("./public/reportForm/groupsum.docx", data, options, function(err, result) {
+      if (err) return console.log(err);
+      fs.writeFileSync(`public/reportOut/${repoTitle}.pdf`, result);
+      res.send({ res: repoTitle });
+    });
+  }
 });
 
 report.post("/report3", function(req, res) {
